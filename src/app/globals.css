@@ -11,52 +11,21 @@
   --color-gold: #B8945F;
   --color-gold-light: #D4B07A;
   --color-gold-dark: #9A7A4A;
-  --color-text: #2D4A3E;
   --color-text-light: #5A7A6E;
   --color-text-muted: #8A9E96;
-  --color-white: #FFFFFF;
 
-  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-body: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-lato: 'Lato', system-ui, sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+/* Base */
 body {
   background-color: #FAF8F5;
   color: #2D4A3E;
-  font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.7;
+  font-family: 'Lato', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  line-height: 1.2;
-  font-weight: 500;
-}
-
-/* Gold decorative lines */
-.gold-line {
-  width: 60px;
-  height: 1px;
-  background-color: #B8945F;
-}
-
-.gold-line-wide {
-  width: 100px;
-  height: 1px;
-  background-color: #B8945F;
 }
 
 /* Selection */
@@ -88,89 +57,48 @@ h1, h2, h3, h4, h5, h6 {
   background: #3A5F50;
 }
 
-/* Card hover effects */
-.card-hover {
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: #2D4A3E #FAF8F5;
 }
 
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(45, 74, 62, 0.08);
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Image zoom on hover */
-.img-zoom {
-  overflow: hidden;
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
-.img-zoom img {
-  transition: transform 0.6s ease;
-}
-
-.img-zoom:hover img {
-  transform: scale(1.05);
-}
-
-/* Nav link underline animation */
-.nav-link {
-  position: relative;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
+/* Utility: gold divider lines */
+.gold-line {
+  width: 60px;
   height: 1px;
   background: #B8945F;
-  transition: width 0.3s ease;
 }
 
-.nav-link:hover::after {
-  width: 100%;
+.gold-line-center {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #B8945F, transparent);
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Focus styles */
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  border-color: #B8945F !important;
-  box-shadow: 0 0 0 3px rgba(184, 148, 95, 0.12);
-}
-
-/* Button & link transitions */
-button, a {
-  transition: all 0.3s ease;
-}
-
-/* Placeholder */
-::placeholder {
-  color: #8A9E96;
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
-}
-
-/* Amenity card hover */
-.amenity-card {
-  transition: all 0.35s ease;
-}
-
-.amenity-card:hover {
-  background-color: #2D4A3E;
-  border-color: #2D4A3E;
-}
-
-.amenity-card:hover .amenity-name {
-  color: #B8945F;
-}
-
-.amenity-card:hover .amenity-desc {
-  color: rgba(250, 248, 245, 0.85);
-}
-
-.amenity-card:hover .amenity-icon {
-  background-color: #B8945F;
-  color: #FFFFFF;
+/* Animation utility */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
 }

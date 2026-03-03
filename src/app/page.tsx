@@ -1,186 +1,185 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+/* --- Data --- */
+
+const navLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Residences', href: '#residences' },
+  { label: 'Amenities', href: '#amenities' },
+  { label: 'Lifestyle', href: '#lifestyle' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const residences = [
+  {
+    name: 'Kensington Villa',
+    type: 'Detached Villa',
+    size: '450 sqm',
+    beds: '4+1 Bedrooms',
+    description:
+      'A stately residence set within private landscaped grounds, featuring grand proportions, formal living spaces, and a wraparound veranda overlooking the estate gardens.',
+    image:
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
+  },
+  {
+    name: 'Belgravia Townhouse',
+    type: 'Townhouse',
+    size: '220 sqm',
+    beds: '3+1 Bedrooms',
+    description:
+      'An elegant multi-level townhouse with a private rooftop terrace, designed for refined urban living with classical proportions and contemporary comforts.',
+    image:
+      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80',
+  },
+  {
+    name: 'Windsor Apartment',
+    type: 'Apartment',
+    size: '120 sqm',
+    beds: '2+1 Bedrooms',
+    description:
+      'A beautifully appointed apartment offering generous living spaces, premium finishes, and sweeping views of the estate parklands from every room.',
+    image:
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
+  },
+];
+
+const amenities = [
+  {
+    name: 'The Clubhouse',
+    description:
+      'An exclusive social hub with a grand ballroom, private dining rooms, lounge bar, and library reading room.',
+    icon: '\u2302', // ⌂
+  },
+  {
+    name: 'Central Park',
+    description:
+      'Four hectares of manicured parklands with meandering pathways, ornamental lakes, and mature specimen trees.',
+    icon: '\u2618', // ☘
+  },
+  {
+    name: 'Sports Pavilion',
+    description:
+      'Championship tennis courts, a 25-metre lap pool, fully equipped gymnasium, and multipurpose sports hall.',
+    icon: '\u2606', // ☆
+  },
+  {
+    name: "Children's Garden",
+    description:
+      'A safe and imaginative play environment with adventure playground, sensory garden, and supervised activity lawn.',
+    icon: '\u263C', // ☼
+  },
+  {
+    name: 'Wellness Centre',
+    description:
+      'A sanctuary of calm offering a full-service spa, yoga studio, meditation garden, and hydrotherapy facilities.',
+    icon: '\u2662', // ♢
+  },
+  {
+    name: 'Estate Security',
+    description:
+      'Round-the-clock professional security with CCTV monitoring, controlled access gates, and dedicated patrol teams.',
+    icon: '\u25C8', // ◈
+  },
+];
+
+const stats = [
+  { value: '15', label: 'Hectares' },
+  { value: '280', label: 'Residences' },
+  { value: '60%', label: 'Green Space' },
+  { value: '24/7', label: 'Security' },
+];
+
+const lifestyleFeatures = [
+  {
+    number: '01',
+    name: 'Community',
+    description:
+      'Regular garden parties, seasonal celebrations, and curated social events that foster genuine neighbourly connections.',
+  },
+  {
+    number: '02',
+    name: 'Culinary',
+    description:
+      'An on-estate dining pavilion, weekend farmers market, and private chef services for intimate gatherings.',
+  },
+  {
+    number: '03',
+    name: 'Wellness',
+    description:
+      'Morning yoga on the great lawn, guided nature walks, and bespoke wellness programmes designed around your life.',
+  },
+  {
+    number: '04',
+    name: 'Arts & Culture',
+    description:
+      'A dedicated gallery space, quarterly art exhibitions, and creative workshops for residents of all ages.',
+  },
+];
+
+/* --- Component --- */
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    interest: '',
-    message: '',
-  });
+  const [scrolled, setScrolled] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Residences', href: '#residences' },
-    { label: 'Amenities', href: '#amenities' },
-    { label: 'Lifestyle', href: '#lifestyle' },
-    { label: 'Contact', href: '#contact' },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const residences = [
-    {
-      name: 'Kensington Villa',
-      type: 'Detached Villa',
-      size: '450 sqm',
-      beds: '4+1 Bedrooms',
-      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
-      description:
-        'A stately residence set within private landscaped grounds, featuring grand proportions, formal living spaces, and a wraparound veranda overlooking the estate gardens.',
-    },
-    {
-      name: 'Belgravia Townhouse',
-      type: 'Townhouse',
-      size: '220 sqm',
-      beds: '3+1 Bedrooms',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
-      description:
-        'An elegant multi-level townhouse with a private rooftop terrace, designed for refined urban living with classical proportions and contemporary comforts.',
-    },
-    {
-      name: 'Windsor Apartment',
-      type: 'Apartment',
-      size: '120 sqm',
-      beds: '2+1 Bedrooms',
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
-      description:
-        'A beautifully appointed apartment offering generous living spaces, premium finishes, and sweeping views of the estate parklands from every room.',
-    },
-  ];
-
-  const amenities = [
-    {
-      name: 'The Clubhouse',
-      description: 'An exclusive social hub with a grand ballroom, private dining rooms, lounge bar, and library reading room.',
-      icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M3 21h18" /><path d="M5 21V7l7-4 7 4v14" /><path d="M9 21v-4h6v4" /><path d="M10 9h4" /><path d="M10 13h4" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Central Park',
-      description: 'Four hectares of manicured parklands with meandering pathways, ornamental lakes, and mature specimen trees.',
-      icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22V8" /><path d="M5 12H2a10 10 0 0 0 20 0h-3" /><path d="M8 6a4 4 0 0 1 8 0" /><path d="M6 10a6 6 0 0 1 12 0" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Sports Pavilion',
-      description: 'Championship tennis courts, a 25-metre lap pool, fully equipped gymnasium, and multipurpose sports hall.',
-      icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20" /><path d="M12 2a14.5 14.5 0 0 1 0 20" /><path d="M2 12h20" />
-        </svg>
-      ),
-    },
-    {
-      name: "Children's Garden",
-      description: 'A safe and imaginative play environment with adventure playground, sensory garden, and supervised activity lawn.',
-      icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 3v1m0 16v1m-7-9H4m16 0h1m-2.636-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707" />
-          <circle cx="12" cy="12" r="4" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Wellness Centre',
-      description: 'A sanctuary of calm offering a full-service spa, yoga studio, meditation garden, and hydrotherapy facilities.',
-      icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10" /><path d="M12 2c3 3.2 5 7.4 5 10" /><path d="M12 2c-3 3.2-5 7.4-5 10" /><path d="M2 12h10" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Estate Security',
-      description: 'Round-the-clock professional security with CCTV monitoring, controlled access gates, and dedicated patrol teams.',
-      icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2l7 4v5c0 5-3.5 9.74-7 11-3.5-1.26-7-6-7-11V6l7-4z" />
-          <path d="M9 12l2 2 4-4" />
-        </svg>
-      ),
-    },
-  ];
-
-  const lifestyleFeatures = [
-    {
-      number: '01',
-      name: 'Community',
-      description: 'Regular garden parties, seasonal celebrations, and curated social events that foster genuine neighbourly connections.',
-    },
-    {
-      number: '02',
-      name: 'Culinary',
-      description: 'An on-estate dining pavilion, weekend farmers market, and private chef services for intimate gatherings.',
-    },
-    {
-      number: '03',
-      name: 'Wellness',
-      description: 'Morning yoga on the great lawn, guided nature walks, and bespoke wellness programmes designed around your life.',
-    },
-    {
-      number: '04',
-      name: 'Arts & Culture',
-      description: 'A dedicated gallery space, quarterly art exhibitions, and creative workshops for residents of all ages.',
-    },
-  ];
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Thank you for your enquiry. Our team will be in touch shortly.');
-    setFormData({ name: '', email: '', phone: '', interest: '', message: '' });
+    setFormSubmitted(true);
   };
 
   return (
-    <div className="min-h-screen bg-cream">
-      {/* ════════════════════════════════════════════════
-          NAVIGATION
-          ════════════════════════════════════════════════ */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-forest/5">
+    <main className="bg-[#FAF8F5] min-h-screen">
+
+      {/* ======================================================================
+          1. FIXED NAVIGATION
+      ====================================================================== */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? 'bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#2D4A3E]/10'
+            : 'bg-[#FAF8F5]/90 backdrop-blur-sm'
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-20 lg:h-24">
             {/* Logo */}
             <a href="#" className="flex flex-col items-start leading-none">
-              <span
-                className="text-xl font-semibold tracking-[0.2em] text-forest"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                REGENT PARK
+              <span className="font-[family-name:var(--font-playfair)] text-[#2D4A3E] text-xl font-semibold tracking-[0.2em] uppercase">
+                Regent Park
               </span>
-              <span
-                className="text-[9px] tracking-[0.35em] text-gold uppercase mt-0.5"
-                style={{ fontFamily: "'Lato', sans-serif" }}
-              >
+              <span className="font-[family-name:var(--font-lato)] text-[#B8945F] text-[9px] tracking-[0.35em] uppercase mt-0.5">
                 Residential Estate
               </span>
             </a>
 
-            {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-10">
+            {/* Desktop Nav Links */}
+            <div className="hidden md:flex items-center gap-10">
               {navLinks.map((link) => (
                 <a
-                  key={link.label}
+                  key={link.href}
                   href={link.href}
-                  className="nav-link text-[13px] font-light tracking-[0.15em] uppercase text-forest/70 hover:text-forest"
-                  style={{ fontFamily: "'Lato', sans-serif" }}
+                  className="font-[family-name:var(--font-lato)] text-[#5A7A6E] hover:text-[#2D4A3E] text-xs tracking-[0.15em] uppercase transition-colors duration-300"
                 >
                   {link.label}
                 </a>
               ))}
             </div>
 
-            {/* Enquire Button (Desktop) */}
+            {/* Desktop CTA */}
             <a
               href="#contact"
-              className="hidden lg:inline-block px-8 py-3 bg-gold text-white text-[11px] font-bold tracking-[0.2em] uppercase hover:bg-gold-dark"
-              style={{ fontFamily: "'Lato', sans-serif" }}
+              className="hidden md:inline-block px-6 py-2.5 bg-[#B8945F] text-white font-[family-name:var(--font-lato)] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#9A7A4A] transition-all duration-300"
             >
               Enquire
             </a>
@@ -188,315 +187,259 @@ export default function Home() {
             {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden flex flex-col gap-1.5 p-2"
+              className="md:hidden flex flex-col gap-1.5 p-2"
               aria-label="Toggle menu"
             >
               <span
-                className={`block w-6 h-px bg-forest transition-all duration-300 ${
-                  mobileMenuOpen ? 'rotate-45 translate-y-[3.5px]' : ''
+                className={`block w-6 h-[1px] bg-[#2D4A3E] transition-all duration-300 ${
+                  mobileMenuOpen ? 'rotate-45 translate-y-[7px]' : ''
                 }`}
               />
               <span
-                className={`block w-6 h-px bg-forest transition-all duration-300 ${
+                className={`block w-6 h-[1px] bg-[#2D4A3E] transition-all duration-300 ${
                   mobileMenuOpen ? 'opacity-0' : ''
                 }`}
               />
               <span
-                className={`block w-6 h-px bg-forest transition-all duration-300 ${
-                  mobileMenuOpen ? '-rotate-45 -translate-y-[3.5px]' : ''
+                className={`block w-6 h-[1px] bg-[#2D4A3E] transition-all duration-300 ${
+                  mobileMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''
                 }`}
               />
             </button>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-cream border-t border-forest/5">
-            <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-5">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-[13px] font-light tracking-[0.15em] uppercase text-forest/70 hover:text-forest"
-                  style={{ fontFamily: "'Lato', sans-serif" }}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="inline-block px-8 py-3 bg-gold text-white text-[11px] font-bold tracking-[0.2em] uppercase text-center hover:bg-gold-dark mt-2"
-                style={{ fontFamily: "'Lato', sans-serif" }}
-              >
-                Enquire
-              </a>
-            </div>
-          </div>
-        )}
       </nav>
 
-      {/* ════════════════════════════════════════════════
-          HERO
-          ════════════════════════════════════════════════ */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-[#FAF8F5]/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className="font-[family-name:var(--font-playfair)] text-[#2D4A3E] text-2xl tracking-[0.2em] uppercase hover:text-[#B8945F] transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            onClick={() => setMobileMenuOpen(false)}
+            className="mt-4 px-8 py-3 bg-[#B8945F] text-white font-[family-name:var(--font-lato)] text-sm font-bold tracking-[0.15em] uppercase"
+          >
+            Enquire
+          </a>
+        </div>
+      )}
+
+      {/* ======================================================================
+          2. HERO
+      ====================================================================== */}
+      <section className="relative h-screen overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1800&q=80"
-            alt="Regent Park Estate"
+            alt="Regent Park Estate exterior at golden hour"
             className="w-full h-full object-cover"
           />
-          {/* Dark green-tinted overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1A2F26]/70 via-[#2D4A3E]/55 to-[#1A2F26]/75" />
+          {/* Dark green overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1A2F26]/60 via-[#2D4A3E]/40 to-[#1A2F26]/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1A2F26]/30 via-transparent to-[#1A2F26]/30" />
         </div>
 
-        {/* Content */}
-        <div className="relative z-10 text-center px-6">
-          {/* Gold label */}
-          <p
-            className="text-gold-light text-[11px] tracking-[0.4em] uppercase mb-8"
-            style={{ fontFamily: "'Lato', sans-serif", fontWeight: 400 }}
-          >
+        {/* Hero Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
+          {/* Sub label */}
+          <p className="font-[family-name:var(--font-lato)] text-[#D4B07A] text-[11px] tracking-[0.4em] uppercase mb-8">
             Residential Estate
           </p>
 
-          {/* Title */}
-          <h1
-            className="text-white leading-[0.9]"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
-            <span className="block text-7xl sm:text-8xl md:text-9xl lg:text-[140px] font-medium tracking-wide">
-              REGENT
-            </span>
-            <span className="block text-7xl sm:text-8xl md:text-9xl lg:text-[140px] font-light tracking-[0.3em] mt-2">
-              PARK
-            </span>
+          {/* Main Title */}
+          <h1 className="font-[family-name:var(--font-playfair)] text-white text-5xl md:text-7xl lg:text-8xl tracking-[0.3em] uppercase mb-2">
+            Regent Park
           </h1>
 
-          {/* Gold line */}
-          <div className="flex justify-center my-8">
-            <div className="gold-line-wide" />
-          </div>
+          {/* Gold Line */}
+          <div className="w-20 h-[1px] bg-[#B8945F] my-8" />
 
           {/* Tagline */}
-          <p
-            className="text-white/80 text-lg sm:text-xl font-light tracking-[0.15em]"
-            style={{ fontFamily: "'Lato', sans-serif" }}
-          >
+          <p className="font-[family-name:var(--font-lato)] text-white/80 text-lg md:text-xl tracking-[0.15em] mb-12">
             Timeless Elegance, Modern Living
           </p>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="#residences"
-              className="px-10 py-4 bg-forest text-white text-[11px] font-bold tracking-[0.2em] uppercase border border-forest hover:bg-forest-light hover:border-forest-light"
-              style={{ fontFamily: "'Lato', sans-serif" }}
+              className="px-8 py-3.5 bg-[#2D4A3E] text-white font-[family-name:var(--font-lato)] text-xs font-bold tracking-[0.2em] uppercase border border-[#2D4A3E] hover:bg-[#3A5F50] hover:border-[#3A5F50] transition-all duration-300"
             >
               Explore Residences
             </a>
             <a
               href="#contact"
-              className="px-10 py-4 bg-transparent text-gold-light text-[11px] font-bold tracking-[0.2em] uppercase border border-gold/50 hover:bg-gold hover:text-white hover:border-gold"
-              style={{ fontFamily: "'Lato', sans-serif" }}
+              className="px-8 py-3.5 border border-[#B8945F]/50 text-[#D4B07A] font-[family-name:var(--font-lato)] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#B8945F] hover:text-white hover:border-[#B8945F] transition-all duration-300"
             >
               Book a Viewing
             </a>
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-          <span
-            className="text-white/40 text-[10px] tracking-[0.3em] uppercase"
-            style={{ fontFamily: "'Lato', sans-serif" }}
-          >
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3">
+          <span className="font-[family-name:var(--font-lato)] text-white/40 text-[10px] tracking-[0.3em] uppercase">
             Scroll
           </span>
-          <div className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent" />
+          <div className="w-[1px] h-8 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          ABOUT
-          ════════════════════════════════════════════════ */}
+      {/* ======================================================================
+          3. ABOUT
+      ====================================================================== */}
       <section id="about" className="py-24 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-            {/* Left: Image */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            {/* Left: Image with gold border frame */}
             <div className="relative">
-              <div className="border border-gold/30 p-3">
+              <div className="relative p-3 border border-[#B8945F]/20">
                 <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80"
-                  alt="The Estate"
-                  className="w-full h-[450px] lg:h-[550px] object-cover"
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
+                  alt="Regent Park estate grounds and architecture"
+                  className="w-full h-auto aspect-[4/5] object-cover"
                 />
               </div>
+              {/* Offset gold corner accents */}
+              <div className="absolute -top-2 -left-2 w-8 h-8 border-t border-l border-[#B8945F]" />
+              <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b border-r border-[#B8945F]" />
             </div>
 
-            {/* Right: Content */}
+            {/* Right: Text */}
             <div>
-              <p
-                className="text-gold text-[11px] tracking-[0.35em] uppercase mb-4"
-                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-              >
-                The Estate
-              </p>
-              <h2
-                className="text-4xl lg:text-5xl text-forest mb-8"
-                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
-              >
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-8 h-[1px] bg-[#B8945F]" />
+                <span className="font-[family-name:var(--font-lato)] text-[#B8945F] text-[10px] font-bold tracking-[0.3em] uppercase">
+                  The Estate
+                </span>
+              </div>
+
+              <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl lg:text-5xl text-[#2D4A3E] leading-[1.2] mb-8">
                 A Legacy of
                 <br />
-                Refined Living
+                <span className="italic text-[#B8945F]">Refined Living</span>
               </h2>
-              <div className="gold-line mb-8" />
-              <p
-                className="text-text-light text-base leading-relaxed mb-6"
-                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-              >
-                Regent Park is an exclusive residential estate inspired by the great English
-                country estates. Spanning 15 hectares of beautifully landscaped grounds, it
-                offers a rare opportunity to live within a community designed around timeless
-                principles of elegance, space, and tranquility.
+
+              <p className="font-[family-name:var(--font-lato)] text-[#5A7A6E] text-sm md:text-base leading-relaxed mb-6">
+                Regent Park is an exclusive residential estate inspired by the
+                great English country estates. Spanning 15 hectares of
+                beautifully landscaped grounds, it offers a rare opportunity to
+                live within a community designed around timeless principles of
+                elegance, space, and tranquility.
               </p>
-              <p
-                className="text-text-light text-base leading-relaxed"
-                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-              >
-                Every detail has been thoughtfully considered, from the tree-lined avenues
-                and ornamental gardens to the classical architectural language that defines
-                each residence. Here, modern convenience meets old-world charm in perfect
-                harmony.
+
+              <p className="font-[family-name:var(--font-lato)] text-[#5A7A6E] text-sm leading-relaxed mb-10">
+                Every detail has been thoughtfully considered, from the
+                tree-lined avenues and ornamental gardens to the classical
+                architectural language that defines each residence. Here, modern
+                convenience meets old-world charm in perfect harmony.
               </p>
+
+              {/* Gold Accent Line */}
+              <div className="w-16 h-[1px] bg-[#B8945F]" />
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-20">
-            {[
-              { value: '15', label: 'Hectares' },
-              { value: '280', label: 'Residences' },
-              { value: '60%', label: 'Green Space' },
-              { value: '24/7', label: 'Security' },
-            ].map((stat) => (
+      {/* ======================================================================
+          4. KEY NUMBERS
+      ====================================================================== */}
+      <section className="py-24 lg:py-32 bg-[#FAF8F5]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
+            {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className="border border-forest/10 p-8 text-center"
+                className={`text-center py-8 md:py-0 ${
+                  index < stats.length - 1
+                    ? 'md:border-r md:border-[#2D4A3E]/10'
+                    : ''
+                } ${
+                  index < 2 ? 'border-b md:border-b-0 border-[#2D4A3E]/10' : ''
+                }`}
               >
-                <p
-                  className="text-3xl lg:text-4xl text-forest mb-2"
-                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
-                >
+                <span className="font-[family-name:var(--font-playfair)] text-[#2D4A3E] text-4xl md:text-5xl lg:text-6xl block mb-2">
                   {stat.value}
-                </p>
-                <p
-                  className="text-text-muted text-[11px] tracking-[0.2em] uppercase"
-                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-                >
+                </span>
+                <span className="font-[family-name:var(--font-lato)] text-[#8A9E96] text-xs font-bold tracking-[0.2em] uppercase">
                   {stat.label}
-                </p>
+                </span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          RESIDENCES
-          ════════════════════════════════════════════════ */}
-      <section id="residences" className="py-24 lg:py-32 bg-cream">
+      {/* ======================================================================
+          5. RESIDENCES
+      ====================================================================== */}
+      <section id="residences" className="py-24 lg:py-32 bg-[#FAF8F5]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <p
-              className="text-gold text-[11px] tracking-[0.35em] uppercase mb-4"
-              style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-            >
-              Our Residences
-            </p>
-            <h2
-              className="text-4xl lg:text-5xl text-forest mb-6"
-              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
-            >
-              A Home for Every Chapter
-            </h2>
-            <div className="flex justify-center">
-              <div className="gold-line" />
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#B8945F]" />
+              <span className="font-[family-name:var(--font-lato)] text-[#B8945F] text-[10px] font-bold tracking-[0.3em] uppercase">
+                Our Residences
+              </span>
+              <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#B8945F]" />
             </div>
+            <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl lg:text-5xl text-[#2D4A3E] leading-[1.2]">
+              A Home for Every <span className="italic text-[#B8945F]">Chapter</span>
+            </h2>
           </div>
 
-          {/* Residence Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {residences.map((res) => (
-              <div key={res.name} className="bg-white card-hover">
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {residences.map((residence) => (
+              <div
+                key={residence.name}
+                className="group bg-white border border-[#2D4A3E]/5 hover:border-[#B8945F]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(45,74,62,0.08)]"
+              >
                 {/* Image */}
-                <div className="img-zoom">
+                <div className="relative aspect-[4/3] overflow-hidden">
                   <img
-                    src={res.image}
-                    alt={res.name}
-                    className="w-full h-64 object-cover"
+                    src={residence.image}
+                    alt={residence.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A2F26]/40 to-transparent" />
                 </div>
 
-                {/* Gold top border */}
-                <div className="h-px bg-gold" />
+                {/* Gold top accent */}
+                <div className="h-[1px] bg-[#B8945F]" />
 
                 {/* Content */}
-                <div className="p-8">
-                  <h3
-                    className="text-2xl text-forest mb-2"
-                    style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
-                  >
-                    {res.name}
+                <div className="p-6">
+                  <h3 className="font-[family-name:var(--font-playfair)] text-xl text-[#2D4A3E] mb-2">
+                    {residence.name}
                   </h3>
-
-                  {/* Type tag */}
-                  <span
-                    className="inline-block text-[10px] tracking-[0.2em] uppercase text-gold border border-gold/30 px-3 py-1 mb-4"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-                  >
-                    {res.type}
+                  <span className="inline-block font-[family-name:var(--font-lato)] text-[10px] font-bold tracking-[0.2em] uppercase text-[#B8945F] border border-[#B8945F]/30 px-3 py-1 mb-4">
+                    {residence.type}
                   </span>
-
-                  {/* Size & Beds */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <span
-                      className="text-text-muted text-sm"
-                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                    >
-                      {res.size}
-                    </span>
-                    <span className="w-1 h-1 bg-gold rounded-full" />
-                    <span
-                      className="text-text-muted text-sm"
-                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                    >
-                      {res.beds}
-                    </span>
-                  </div>
-
-                  {/* Description */}
-                  <p
-                    className="text-text-light text-sm leading-relaxed mb-6"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                  >
-                    {res.description}
+                  <p className="font-[family-name:var(--font-lato)] text-[#8A9E96] text-xs tracking-[0.1em] mb-4">
+                    {residence.size} &middot; {residence.beds}
                   </p>
-
-                  {/* Link */}
+                  <p className="font-[family-name:var(--font-lato)] text-[#5A7A6E] text-sm leading-relaxed mb-6">
+                    {residence.description}
+                  </p>
                   <a
                     href="#contact"
-                    className="inline-flex items-center gap-2 text-gold text-[11px] tracking-[0.15em] uppercase hover:text-gold-dark"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
+                    className="inline-flex items-center gap-2 font-[family-name:var(--font-lato)] text-[#B8945F] text-xs font-bold tracking-[0.15em] uppercase hover:gap-3 transition-all duration-300"
                   >
                     View Details
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
+                    <span className="text-sm">&rarr;</span>
                   </a>
                 </div>
               </div>
@@ -505,53 +448,44 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          AMENITIES
-          ════════════════════════════════════════════════ */}
+      {/* ======================================================================
+          6. AMENITIES
+      ====================================================================== */}
       <section id="amenities" className="py-24 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <p
-              className="text-gold text-[11px] tracking-[0.35em] uppercase mb-4"
-              style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-            >
-              Estate Amenities
-            </p>
-            <h2
-              className="text-4xl lg:text-5xl text-forest mb-6"
-              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
-            >
-              Life Beyond the Residence
-            </h2>
-            <div className="flex justify-center">
-              <div className="gold-line" />
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#B8945F]" />
+              <span className="font-[family-name:var(--font-lato)] text-[#B8945F] text-[10px] font-bold tracking-[0.3em] uppercase">
+                Estate Amenities
+              </span>
+              <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#B8945F]" />
             </div>
+            <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl lg:text-5xl text-[#2D4A3E] leading-[1.2]">
+              Life Beyond the <span className="italic text-[#B8945F]">Residence</span>
+            </h2>
           </div>
 
-          {/* Amenity Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* 2x3 Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {amenities.map((amenity) => (
               <div
                 key={amenity.name}
-                className="amenity-card border border-forest/8 p-10 text-center"
+                className="border border-[#2D4A3E]/8 p-8 text-center hover:bg-[#2D4A3E] hover:border-[#2D4A3E] transition-all duration-500 group"
               >
-                {/* Icon circle */}
-                <div className="amenity-icon inline-flex items-center justify-center w-16 h-16 rounded-full bg-forest text-white mb-6 transition-all duration-300">
-                  {amenity.icon}
+                {/* Icon */}
+                <div className="w-16 h-16 rounded-full bg-[#2D4A3E] group-hover:bg-[#B8945F] flex items-center justify-center mx-auto mb-6 transition-colors duration-500">
+                  <span className="text-white text-xl">{amenity.icon}</span>
                 </div>
 
-                <h3
-                  className="amenity-name text-xl text-forest mb-3 transition-colors duration-300"
-                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
-                >
+                {/* Name */}
+                <h3 className="font-[family-name:var(--font-playfair)] text-lg text-[#2D4A3E] group-hover:text-[#B8945F] mb-3 transition-colors duration-500">
                   {amenity.name}
                 </h3>
 
-                <p
-                  className="amenity-desc text-text-light text-sm leading-relaxed transition-colors duration-300"
-                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                >
+                {/* Description */}
+                <p className="font-[family-name:var(--font-lato)] text-[#5A7A6E] group-hover:text-[#FAF8F5]/85 text-sm leading-relaxed transition-colors duration-500">
                   {amenity.description}
                 </p>
               </div>
@@ -560,33 +494,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          LIFESTYLE
-          ════════════════════════════════════════════════ */}
-      <section id="lifestyle" className="py-24 lg:py-32 bg-forest">
+      {/* ======================================================================
+          7. LIFESTYLE
+      ====================================================================== */}
+      <section id="lifestyle" className="py-24 lg:py-32 bg-[#2D4A3E]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-            {/* Left: Image */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            {/* Left: Heading + Image */}
             <div>
-              <p
-                className="text-gold text-[11px] tracking-[0.35em] uppercase mb-4"
-                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-              >
-                The Lifestyle
-              </p>
-              <h2
-                className="text-4xl lg:text-5xl text-white mb-6"
-                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
-              >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-8 h-[1px] bg-[#B8945F]" />
+                <span className="font-[family-name:var(--font-lato)] text-[#B8945F] text-[10px] font-bold tracking-[0.3em] uppercase">
+                  The Lifestyle
+                </span>
+              </div>
+
+              <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl lg:text-5xl text-white leading-[1.2] mb-6">
                 More Than a Home,
                 <br />
-                <span className="text-gold-light italic">A Way of Life</span>
+                <span className="italic text-[#D4B07A]">A Way of Life</span>
               </h2>
-              <div className="gold-line mb-10" />
+
+              <div className="w-16 h-[1px] bg-[#B8945F] mb-10" />
 
               <img
-                src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80"
-                alt="Regent Park Lifestyle"
+                src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80"
+                alt="Regent Park lifestyle and interior living"
                 className="w-full h-[350px] object-cover"
               />
             </div>
@@ -595,23 +528,14 @@ export default function Home() {
             <div className="flex flex-col gap-10">
               {lifestyleFeatures.map((feature) => (
                 <div key={feature.number} className="flex gap-6">
-                  <span
-                    className="text-gold text-3xl font-light shrink-0 w-12"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
-                  >
+                  <span className="font-[family-name:var(--font-playfair)] text-[#B8945F] text-3xl shrink-0 w-12">
                     {feature.number}
                   </span>
                   <div>
-                    <h3
-                      className="text-white text-xl mb-2"
-                      style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
-                    >
+                    <h3 className="font-[family-name:var(--font-playfair)] text-white text-xl mb-2">
                       {feature.name}
                     </h3>
-                    <p
-                      className="text-white/60 text-sm leading-relaxed"
-                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                    >
+                    <p className="font-[family-name:var(--font-lato)] text-white/60 text-sm leading-relaxed">
                       {feature.description}
                     </p>
                   </div>
@@ -622,135 +546,104 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          TESTIMONIAL
-          ════════════════════════════════════════════════ */}
-      <section className="py-24 lg:py-32 bg-cream">
+      {/* ======================================================================
+          8. TESTIMONIAL
+      ====================================================================== */}
+      <section className="py-24 lg:py-32 bg-[#FAF8F5]">
         <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center">
           {/* Gold quotation mark */}
-          <span
-            className="text-gold/20 text-[120px] leading-none block -mb-10"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
+          <span className="font-[family-name:var(--font-playfair)] text-[#B8945F]/20 text-[120px] leading-none block -mb-10">
             &ldquo;
           </span>
 
-          <blockquote
-            className="text-forest text-2xl lg:text-3xl leading-relaxed italic mb-10"
-            style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400 }}
-          >
-            Regent Park has given our family the rare gift of space and community in equal
-            measure. The grounds are magnificent, the neighbours are wonderful, and every
-            morning I wake up grateful for this extraordinary place we call home.
+          <blockquote className="font-[family-name:var(--font-playfair)] text-[#2D4A3E] text-2xl lg:text-3xl leading-relaxed italic mb-10">
+            Regent Park has given our family the rare gift of space and
+            community in equal measure. The grounds are magnificent, the
+            neighbours are wonderful, and every morning I wake up grateful for
+            this extraordinary place we call home.
           </blockquote>
 
-          <div className="gold-line mx-auto mb-8" />
+          <div className="gold-line-center mb-8" />
 
-          <p
-            className="text-forest text-sm tracking-[0.1em]"
-            style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-          >
-            Victoria & James Hartington
+          <p className="font-[family-name:var(--font-lato)] text-[#2D4A3E] text-sm font-bold tracking-[0.1em]">
+            Victoria &amp; James Hartington
           </p>
-          <p
-            className="text-text-muted text-[11px] tracking-[0.15em] uppercase mt-1"
-            style={{ fontFamily: "'Lato', sans-serif", fontWeight: 400 }}
-          >
+          <p className="font-[family-name:var(--font-lato)] text-[#8A9E96] text-[11px] tracking-[0.15em] uppercase mt-1">
             Kensington Villa Residents
           </p>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          CONTACT
-          ════════════════════════════════════════════════ */}
+      {/* ======================================================================
+          9. CONTACT
+      ====================================================================== */}
       <section id="contact" className="py-24 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20">
-            {/* Left: Info */}
-            <div>
-              <p
-                className="text-gold text-[11px] tracking-[0.35em] uppercase mb-4"
-                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-              >
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#B8945F]" />
+              <span className="font-[family-name:var(--font-lato)] text-[#B8945F] text-[10px] font-bold tracking-[0.3em] uppercase">
                 Get in Touch
-              </p>
-              <h2
-                className="text-4xl lg:text-5xl text-forest mb-6"
-                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
-              >
-                Begin Your Journey
-              </h2>
-              <div className="gold-line mb-8" />
-              <p
-                className="text-text-light text-base leading-relaxed mb-12"
-                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-              >
-                We invite you to experience Regent Park firsthand. Our estate consultants
-                are available to arrange a private viewing and guide you through every
-                aspect of life within the estate.
-              </p>
+              </span>
+              <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#B8945F]" />
+            </div>
+            <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl lg:text-5xl text-[#2D4A3E] leading-[1.2] mb-4">
+              Begin Your <span className="italic text-[#B8945F]">Journey</span>
+            </h2>
+            <p className="font-[family-name:var(--font-lato)] text-[#5A7A6E] text-sm max-w-lg mx-auto">
+              We invite you to experience Regent Park firsthand. Our estate
+              consultants are available to arrange a private viewing.
+            </p>
+          </div>
 
-              {/* Contact Details */}
-              <div className="flex flex-col gap-8">
+          {/* Two Columns: Info + Form */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+            {/* Left: Contact Info */}
+            <div className="flex flex-col justify-center">
+              <div className="space-y-8">
+                {/* Address */}
                 <div>
-                  <h4
-                    className="text-forest text-sm tracking-[0.1em] uppercase mb-2"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-                  >
+                  <h3 className="font-[family-name:var(--font-lato)] text-[#2D4A3E] text-[10px] font-bold tracking-[0.3em] uppercase mb-3">
                     Estate Sales Gallery
-                  </h4>
-                  <p
-                    className="text-text-light text-sm"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                  >
-                    Regent Park Boulevard No. 1<br />
-                    Jakarta Selatan 12310, Indonesia
+                  </h3>
+                  <p className="font-[family-name:var(--font-lato)] text-[#5A7A6E] text-sm leading-relaxed">
+                    Regent Park Boulevard No. 1
+                    <br />
+                    Jakarta Selatan 12310
+                    <br />
+                    Indonesia
                   </p>
                 </div>
 
+                {/* Phone */}
                 <div>
-                  <h4
-                    className="text-forest text-sm tracking-[0.1em] uppercase mb-2"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-                  >
+                  <h3 className="font-[family-name:var(--font-lato)] text-[#2D4A3E] text-[10px] font-bold tracking-[0.3em] uppercase mb-3">
                     Telephone
-                  </h4>
-                  <p
-                    className="text-text-light text-sm"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                  >
+                  </h3>
+                  <p className="font-[family-name:var(--font-lato)] text-[#5A7A6E] text-sm">
                     +62 21 5080 8888
                   </p>
                 </div>
 
+                {/* Email */}
                 <div>
-                  <h4
-                    className="text-forest text-sm tracking-[0.1em] uppercase mb-2"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-                  >
+                  <h3 className="font-[family-name:var(--font-lato)] text-[#2D4A3E] text-[10px] font-bold tracking-[0.3em] uppercase mb-3">
                     Email
-                  </h4>
-                  <p
-                    className="text-text-light text-sm"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                  >
+                  </h3>
+                  <p className="font-[family-name:var(--font-lato)] text-[#5A7A6E] text-sm">
                     enquiries@regentpark.id
                   </p>
                 </div>
 
+                {/* Hours */}
                 <div>
-                  <h4
-                    className="text-forest text-sm tracking-[0.1em] uppercase mb-2"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-                  >
+                  <h3 className="font-[family-name:var(--font-lato)] text-[#2D4A3E] text-[10px] font-bold tracking-[0.3em] uppercase mb-3">
                     Viewing Hours
-                  </h4>
-                  <p
-                    className="text-text-light text-sm"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                  >
-                    Monday &ndash; Saturday: 09:00 &ndash; 17:00<br />
+                  </h3>
+                  <p className="font-[family-name:var(--font-lato)] text-[#5A7A6E] text-sm">
+                    Monday &ndash; Saturday: 09:00 &ndash; 17:00
+                    <br />
                     Sunday: By appointment only
                   </p>
                 </div>
@@ -759,81 +652,60 @@ export default function Home() {
 
             {/* Right: Form */}
             <div>
-              <div className="bg-cream p-10 lg:p-12">
-                <h3
-                  className="text-2xl text-forest mb-8"
-                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+              {!formSubmitted ? (
+                <form
+                  onSubmit={handleFormSubmit}
+                  className="bg-[#FAF8F5] border border-[#2D4A3E]/5 p-8 md:p-10"
                 >
-                  Arrange a Private Viewing
-                </h3>
+                  <h3 className="font-[family-name:var(--font-playfair)] text-2xl text-[#2D4A3E] mb-8">
+                    Arrange a Private Viewing
+                  </h3>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                  <div>
-                    <label
-                      className="block text-forest text-[11px] tracking-[0.15em] uppercase mb-2"
-                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-                    >
+                  {/* Name */}
+                  <div className="mb-6">
+                    <label className="font-[family-name:var(--font-lato)] text-[#2D4A3E] text-[10px] font-bold tracking-[0.2em] uppercase block mb-2">
                       Full Name
                     </label>
                     <input
                       type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Enter your full name"
                       required
-                      className="w-full px-4 py-3 bg-white border border-forest/15 text-forest text-sm focus:border-gold focus:ring-0"
-                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                      placeholder="Enter your full name"
+                      className="w-full bg-white border border-[#2D4A3E]/15 focus:border-[#B8945F] text-[#2D4A3E] font-[family-name:var(--font-lato)] text-sm px-4 py-3 outline-none transition-colors placeholder:text-[#8A9E96]"
                     />
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-6">
+                  {/* Email & Phone */}
+                  <div className="grid sm:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <label
-                        className="block text-forest text-[11px] tracking-[0.15em] uppercase mb-2"
-                        style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-                      >
+                      <label className="font-[family-name:var(--font-lato)] text-[#2D4A3E] text-[10px] font-bold tracking-[0.2em] uppercase block mb-2">
                         Email
                       </label>
                       <input
                         type="email"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="your@email.com"
                         required
-                        className="w-full px-4 py-3 bg-white border border-forest/15 text-forest text-sm focus:border-gold focus:ring-0"
-                        style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                        placeholder="your@email.com"
+                        className="w-full bg-white border border-[#2D4A3E]/15 focus:border-[#B8945F] text-[#2D4A3E] font-[family-name:var(--font-lato)] text-sm px-4 py-3 outline-none transition-colors placeholder:text-[#8A9E96]"
                       />
                     </div>
                     <div>
-                      <label
-                        className="block text-forest text-[11px] tracking-[0.15em] uppercase mb-2"
-                        style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-                      >
+                      <label className="font-[family-name:var(--font-lato)] text-[#2D4A3E] text-[10px] font-bold tracking-[0.2em] uppercase block mb-2">
                         Phone
                       </label>
                       <input
                         type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="+62 xxx xxxx xxxx"
-                        className="w-full px-4 py-3 bg-white border border-forest/15 text-forest text-sm focus:border-gold focus:ring-0"
-                        style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                        className="w-full bg-white border border-[#2D4A3E]/15 focus:border-[#B8945F] text-[#2D4A3E] font-[family-name:var(--font-lato)] text-sm px-4 py-3 outline-none transition-colors placeholder:text-[#8A9E96]"
                       />
                     </div>
                   </div>
 
-                  <div>
-                    <label
-                      className="block text-forest text-[11px] tracking-[0.15em] uppercase mb-2"
-                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-                    >
+                  {/* Interest */}
+                  <div className="mb-6">
+                    <label className="font-[family-name:var(--font-lato)] text-[#2D4A3E] text-[10px] font-bold tracking-[0.2em] uppercase block mb-2">
                       Interest
                     </label>
                     <select
-                      value={formData.interest}
-                      onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-forest/15 text-forest text-sm focus:border-gold focus:ring-0 appearance-none"
-                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                      className="w-full bg-white border border-[#2D4A3E]/15 focus:border-[#B8945F] text-[#2D4A3E] font-[family-name:var(--font-lato)] text-sm px-4 py-3 outline-none transition-colors appearance-none"
                     >
                       <option value="">Select residence type</option>
                       <option value="villa">Kensington Villa</option>
@@ -843,151 +715,138 @@ export default function Home() {
                     </select>
                   </div>
 
-                  <div>
-                    <label
-                      className="block text-forest text-[11px] tracking-[0.15em] uppercase mb-2"
-                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-                    >
+                  {/* Message */}
+                  <div className="mb-10">
+                    <label className="font-[family-name:var(--font-lato)] text-[#2D4A3E] text-[10px] font-bold tracking-[0.2em] uppercase block mb-2">
                       Message
                     </label>
                     <textarea
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Tell us how we can assist you..."
                       rows={4}
-                      className="w-full px-4 py-3 bg-white border border-forest/15 text-forest text-sm focus:border-gold focus:ring-0 resize-none"
-                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                      placeholder="Tell us how we can assist you..."
+                      className="w-full bg-white border border-[#2D4A3E]/15 focus:border-[#B8945F] text-[#2D4A3E] font-[family-name:var(--font-lato)] text-sm px-4 py-3 outline-none transition-colors resize-none placeholder:text-[#8A9E96]"
                     />
                   </div>
 
+                  {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full py-4 bg-forest text-white text-[11px] font-bold tracking-[0.2em] uppercase hover:bg-forest-light"
-                    style={{ fontFamily: "'Lato', sans-serif" }}
+                    className="w-full py-4 bg-[#2D4A3E] text-white font-[family-name:var(--font-lato)] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#3A5F50] transition-all duration-300"
                   >
                     Submit Enquiry
                   </button>
+
+                  <p className="font-[family-name:var(--font-lato)] text-[#8A9E96]/60 text-[10px] mt-4 text-center">
+                    We respect your privacy. Your information will never be
+                    shared.
+                  </p>
                 </form>
-              </div>
+              ) : (
+                <div className="bg-[#FAF8F5] border border-[#B8945F]/30 p-8 md:p-10 flex flex-col items-center justify-center min-h-[460px] text-center">
+                  <div className="w-12 h-12 border border-[#B8945F] rotate-45 flex items-center justify-center mb-8">
+                    <span className="text-[#B8945F] -rotate-45 text-lg">
+                      &#10003;
+                    </span>
+                  </div>
+                  <h3 className="font-[family-name:var(--font-playfair)] text-2xl text-[#2D4A3E] mb-4">
+                    Thank You
+                  </h3>
+                  <p className="font-[family-name:var(--font-lato)] text-[#5A7A6E] text-sm max-w-sm leading-relaxed">
+                    Your enquiry has been received. Our estate consultants will
+                    contact you within 24 hours to arrange your private viewing.
+                  </p>
+                  <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#B8945F] to-transparent mt-8" />
+                </div>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          FOOTER
-          ════════════════════════════════════════════════ */}
-      <footer className="py-16 lg:py-20 bg-forest-dark">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
+      {/* ======================================================================
+          10. FOOTER
+      ====================================================================== */}
+      <footer className="bg-[#1A2F26] border-t border-[#2D4A3E]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* Column 1: Brand */}
             <div>
-              <h3
-                className="text-white text-xl tracking-[0.15em] mb-2"
-                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
-              >
-                REGENT PARK
+              <h3 className="font-[family-name:var(--font-playfair)] text-white text-lg tracking-[0.2em] uppercase mb-1">
+                Regent Park
               </h3>
-              <p
-                className="text-gold text-[9px] tracking-[0.3em] uppercase mb-6"
-                style={{ fontFamily: "'Lato', sans-serif" }}
-              >
+              <p className="font-[family-name:var(--font-lato)] text-[#B8945F] text-[9px] tracking-[0.3em] uppercase mb-4">
                 Residential Estate
               </p>
-              <p
-                className="text-white/40 text-sm leading-relaxed"
-                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-              >
-                An exclusive residential community
-                inspired by the great English estates.
-                Timeless elegance in the heart of Jakarta.
+              <p className="font-[family-name:var(--font-lato)] text-white/40 text-xs leading-relaxed">
+                An exclusive residential community inspired by the great English
+                estates. Timeless elegance in the heart of Jakarta.
               </p>
             </div>
 
             {/* Column 2: Quick Links */}
             <div>
-              <h4
-                className="text-white text-[11px] tracking-[0.2em] uppercase mb-6"
-                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-              >
+              <h3 className="font-[family-name:var(--font-lato)] text-white text-[10px] font-bold tracking-[0.3em] uppercase mb-6">
                 Explore
-              </h4>
-              <div className="flex flex-col gap-3">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="text-white/40 text-sm hover:text-gold"
-                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                  >
-                    {link.label}
-                  </a>
-                ))}
+              </h3>
+              <div className="space-y-3">
+                {['About', 'Residences', 'Amenities', 'Lifestyle', 'Contact', 'Privacy Policy'].map(
+                  (link) => (
+                    <a
+                      key={link}
+                      href={`#${link.toLowerCase().replace(/\s+/g, '-')}`}
+                      className="block font-[family-name:var(--font-lato)] text-white/40 text-xs hover:text-[#B8945F] transition-colors duration-300"
+                    >
+                      {link}
+                    </a>
+                  )
+                )}
               </div>
             </div>
 
             {/* Column 3: Contact */}
             <div>
-              <h4
-                className="text-white text-[11px] tracking-[0.2em] uppercase mb-6"
-                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
-              >
+              <h3 className="font-[family-name:var(--font-lato)] text-white text-[10px] font-bold tracking-[0.3em] uppercase mb-6">
                 Contact
-              </h4>
-              <div className="flex flex-col gap-3">
-                <p
-                  className="text-white/40 text-sm"
-                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                >
+              </h3>
+              <div className="space-y-3">
+                <p className="font-[family-name:var(--font-lato)] text-white/40 text-xs">
                   Regent Park Boulevard No. 1
                 </p>
-                <p
-                  className="text-white/40 text-sm"
-                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                >
+                <p className="font-[family-name:var(--font-lato)] text-white/40 text-xs">
                   Jakarta Selatan 12310
                 </p>
-                <p
-                  className="text-white/40 text-sm"
-                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                >
+                <p className="font-[family-name:var(--font-lato)] text-white/40 text-xs">
                   +62 21 5080 8888
                 </p>
-                <p
-                  className="text-white/40 text-sm"
-                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-                >
+                <p className="font-[family-name:var(--font-lato)] text-white/40 text-xs">
                   enquiries@regentpark.id
                 </p>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Bottom Bar */}
-          <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p
-              className="text-white/30 text-xs"
-              style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-            >
-              &copy; 2026 Regent Park Estate. All rights reserved.
-            </p>
-            <p
-              className="text-white/30 text-xs"
-              style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
-            >
-              Made with &#9829; by{' '}
-              <a
-                href="https://creativism.id"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gold/60 hover:text-gold"
-              >
-                Creativism
-              </a>
-            </p>
+        {/* Bottom Bar */}
+        <div className="border-t border-white/10">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <p className="font-[family-name:var(--font-lato)] text-white/30 text-[10px] tracking-[0.1em]">
+                &copy; 2026 Regent Park Estate. All rights reserved.
+              </p>
+              <p className="font-[family-name:var(--font-lato)] text-white/30 text-[10px] tracking-[0.1em]">
+                Made with &#9829; by{' '}
+                <a
+                  href="https://creativism.id"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#B8945F]/50 hover:text-[#B8945F] transition-colors"
+                >
+                  Creativism
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }
