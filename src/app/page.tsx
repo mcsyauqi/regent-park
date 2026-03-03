@@ -2,340 +2,308 @@
 
 import { useState } from 'react';
 
-/* ─────────────────────────────────────────────
-   Regent Park — Classic Elegant Luxury Residential Estate
-   English Estate-Inspired | Forest Green & Gold
-   ───────────────────────────────────────────── */
-
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    interest: '',
+    message: '',
+  });
 
   const navLinks = [
     { label: 'About', href: '#about' },
     { label: 'Residences', href: '#residences' },
     { label: 'Amenities', href: '#amenities' },
     { label: 'Lifestyle', href: '#lifestyle' },
-    { label: 'Master Plan', href: '#masterplan' },
     { label: 'Contact', href: '#contact' },
   ];
 
   const residences = [
     {
-      name: 'The Kensington Villa',
-      size: '420 sqm',
+      name: 'Kensington Villa',
+      type: 'Detached Villa',
+      size: '450 sqm',
       beds: '4+1 Bedrooms',
-      feature: 'Private Garden',
-      price: 'From IDR 8.5B',
-      image:
-        'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
       description:
-        'A stately detached villa set within its own landscaped grounds. Grand entrance hall, formal dining room, private study, and a wraparound veranda overlooking the estate gardens. Finished with imported marble and hand-laid herringbone parquet.',
+        'A stately residence set within private landscaped grounds, featuring grand proportions, formal living spaces, and a wraparound veranda overlooking the estate gardens.',
     },
     {
-      name: 'The Belgravia Townhouse',
-      size: '280 sqm',
+      name: 'Belgravia Townhouse',
+      type: 'Townhouse',
+      size: '220 sqm',
       beds: '3+1 Bedrooms',
-      feature: 'Rooftop Terrace',
-      price: 'From IDR 5.2B',
-      image:
-        'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
       description:
-        'An elegant three-storey townhouse with a private rooftop terrace and double-height living room. Thoughtful proportions, bespoke joinery, and plantation shutters create an atmosphere of refined comfort.',
+        'An elegant multi-level townhouse with a private rooftop terrace, designed for refined urban living with classical proportions and contemporary comforts.',
     },
     {
-      name: 'The Windsor Residence',
-      size: '180 sqm',
+      name: 'Windsor Apartment',
+      type: 'Apartment',
+      size: '120 sqm',
       beds: '2+1 Bedrooms',
-      feature: 'Park View',
-      price: 'From IDR 3.8B',
-      image:
-        'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
       description:
-        'A beautifully appointed residence overlooking the central park. Marble-clad bathrooms, a gourmet kitchen, and floor-to-ceiling windows that frame the estate\'s mature trees and manicured lawns.',
+        'A beautifully appointed apartment offering generous living spaces, premium finishes, and sweeping views of the estate parklands from every room.',
     },
   ];
 
   const amenities = [
     {
+      name: 'The Clubhouse',
+      description: 'An exclusive social hub with a grand ballroom, private dining rooms, lounge bar, and library reading room.',
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-8 h-8">
-          <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6" />
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 21h18" /><path d="M5 21V7l7-4 7 4v14" /><path d="M9 21v-4h6v4" /><path d="M10 9h4" /><path d="M10 13h4" />
         </svg>
       ),
-      title: 'The Clubhouse',
-      description: 'A grand social hall with library lounge, billiard room, private dining, and members\' bar.',
     },
     {
+      name: 'Central Park',
+      description: 'Four hectares of manicured parklands with meandering pathways, ornamental lakes, and mature specimen trees.',
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-8 h-8">
-          <path d="M12 3C7 3 3 7 3 12s4 9 9 9 9-4 9-9-4-9-9-9z" />
-          <path d="M12 7v5l3 3" />
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22V8" /><path d="M5 12H2a10 10 0 0 0 20 0h-3" /><path d="M8 6a4 4 0 0 1 8 0" /><path d="M6 10a6 6 0 0 1 12 0" />
         </svg>
       ),
-      title: 'The Central Park',
-      description: '5 hectares of landscaped gardens, mature trees, walking paths, and reflective water features.',
     },
     {
+      name: 'Sports Pavilion',
+      description: 'Championship tennis courts, a 25-metre lap pool, fully equipped gymnasium, and multipurpose sports hall.',
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-8 h-8">
-          <rect x="2" y="6" width="20" height="12" rx="2" />
-          <path d="M6 12h4M14 12h4M12 6v12" />
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20" /><path d="M12 2a14.5 14.5 0 0 1 0 20" /><path d="M2 12h20" />
         </svg>
       ),
-      title: 'Sports Pavilion',
-      description: 'Tennis courts, swimming pool, gymnasium, and a dedicated yoga and wellness studio.',
     },
     {
+      name: "Children's Garden",
+      description: 'A safe and imaginative play environment with adventure playground, sensory garden, and supervised activity lawn.',
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-8 h-8">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 3v1m0 16v1m-7-9H4m16 0h1m-2.636-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707" />
+          <circle cx="12" cy="12" r="4" />
         </svg>
       ),
-      title: 'Children\'s Garden',
-      description: 'A safe, imaginative play area designed in the tradition of English adventure gardens.',
     },
     {
+      name: 'Wellness Centre',
+      description: 'A sanctuary of calm offering a full-service spa, yoga studio, meditation garden, and hydrotherapy facilities.',
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-8 h-8">
-          <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10" /><path d="M12 2c3 3.2 5 7.4 5 10" /><path d="M12 2c-3 3.2-5 7.4-5 10" /><path d="M2 12h10" />
         </svg>
       ),
-      title: '24/7 Concierge',
-      description: 'Dedicated estate management, valet parking, housekeeping, and personal assistant services.',
     },
     {
+      name: 'Estate Security',
+      description: 'Round-the-clock professional security with CCTV monitoring, controlled access gates, and dedicated patrol teams.',
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-8 h-8">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2l7 4v5c0 5-3.5 9.74-7 11-3.5-1.26-7-6-7-11V6l7-4z" />
+          <path d="M9 12l2 2 4-4" />
         </svg>
       ),
-      title: 'Estate Security',
-      description: 'Gated entry with 24-hour security, CCTV surveillance, and smart access control systems.',
     },
   ];
 
   const lifestyleFeatures = [
     {
-      title: 'Community Events',
-      description: 'Regular garden parties, seasonal celebrations, and exclusive residents\' gatherings that foster a sense of belonging within the estate.',
+      number: '01',
+      name: 'Community',
+      description: 'Regular garden parties, seasonal celebrations, and curated social events that foster genuine neighbourly connections.',
     },
     {
-      title: 'Culinary Experiences',
-      description: 'From weekend farmers\' markets to private chef events at the clubhouse, enjoy a curated culinary programme.',
+      number: '02',
+      name: 'Culinary',
+      description: 'An on-estate dining pavilion, weekend farmers market, and private chef services for intimate gatherings.',
     },
     {
-      title: 'Wellness & Nature',
-      description: 'Morning yoga in the park, guided nature walks, and a wellness calendar designed for mind and body.',
+      number: '03',
+      name: 'Wellness',
+      description: 'Morning yoga on the great lawn, guided nature walks, and bespoke wellness programmes designed around your life.',
     },
     {
-      title: 'Arts & Culture',
-      description: 'Art exhibitions, live music evenings, and a curated library programme to enrich the estate\'s cultural life.',
+      number: '04',
+      name: 'Arts & Culture',
+      description: 'A dedicated gallery space, quarterly art exhibitions, and creative workshops for residents of all ages.',
     },
   ];
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert('Thank you for your enquiry. Our team will be in touch shortly.');
+    setFormData({ name: '', email: '', phone: '', interest: '', message: '' });
+  };
+
   return (
-    <main style={{ opacity: 1 }}>
-      {/* ═══════════════════════════════════════════
+    <div className="min-h-screen bg-cream">
+      {/* ════════════════════════════════════════════════
           NAVIGATION
-          ═══════════════════════════════════════════ */}
-      <nav
-        className="fixed top-0 left-0 right-0 z-50"
-        style={{
-          backgroundColor: 'rgba(250, 248, 245, 0.95)',
-          backdropFilter: 'blur(8px)',
-          borderBottom: '1px solid rgba(184, 148, 95, 0.2)',
-        }}
-      >
+          ════════════════════════════════════════════════ */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-forest/5">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <a
-              href="#"
-              className="flex-shrink-0"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
+            <a href="#" className="flex flex-col items-start leading-none">
               <span
-                className="text-lg md:text-xl tracking-[0.15em]"
-                style={{ color: '#2D4A3E', fontWeight: 600 }}
+                className="text-xl font-semibold tracking-[0.2em] text-forest"
+                style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 REGENT PARK
+              </span>
+              <span
+                className="text-[9px] tracking-[0.35em] text-gold uppercase mt-0.5"
+                style={{ fontFamily: "'Lato', sans-serif" }}
+              >
+                Residential Estate
               </span>
             </a>
 
             {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-10">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="nav-link text-xs tracking-[0.15em] uppercase"
-                  style={{
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 400,
-                    color: '#2D4A3E',
-                  }}
+                  className="nav-link text-[13px] font-light tracking-[0.15em] uppercase text-forest/70 hover:text-forest"
+                  style={{ fontFamily: "'Lato', sans-serif" }}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            {/* Enquire Button (Desktop) */}
+            <a
+              href="#contact"
+              className="hidden lg:inline-block px-8 py-3 bg-gold text-white text-[11px] font-bold tracking-[0.2em] uppercase hover:bg-gold-dark"
+              style={{ fontFamily: "'Lato', sans-serif" }}
+            >
+              Enquire
+            </a>
+
+            {/* Mobile Hamburger */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden flex flex-col gap-1.5 p-2"
+              aria-label="Toggle menu"
+            >
+              <span
+                className={`block w-6 h-px bg-forest transition-all duration-300 ${
+                  mobileMenuOpen ? 'rotate-45 translate-y-[3.5px]' : ''
+                }`}
+              />
+              <span
+                className={`block w-6 h-px bg-forest transition-all duration-300 ${
+                  mobileMenuOpen ? 'opacity-0' : ''
+                }`}
+              />
+              <span
+                className={`block w-6 h-px bg-forest transition-all duration-300 ${
+                  mobileMenuOpen ? '-rotate-45 -translate-y-[3.5px]' : ''
+                }`}
+              />
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-cream border-t border-forest/5">
+            <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-5">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-[13px] font-light tracking-[0.15em] uppercase text-forest/70 hover:text-forest"
+                  style={{ fontFamily: "'Lato', sans-serif" }}
                 >
                   {link.label}
                 </a>
               ))}
               <a
                 href="#contact"
-                className="btn-primary ml-4"
-                style={{ padding: '10px 24px', fontSize: '11px' }}
+                onClick={() => setMobileMenuOpen(false)}
+                className="inline-block px-8 py-3 bg-gold text-white text-[11px] font-bold tracking-[0.2em] uppercase text-center hover:bg-gold-dark mt-2"
+                style={{ fontFamily: "'Lato', sans-serif" }}
               >
                 Enquire
               </a>
             </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="lg:hidden flex flex-col gap-1.5 p-2"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              <span
-                className="block w-6 h-px transition-all duration-300"
-                style={{
-                  backgroundColor: '#2D4A3E',
-                  transform: mobileMenuOpen ? 'rotate(45deg) translate(3px, 3px)' : 'none',
-                }}
-              />
-              <span
-                className="block w-6 h-px transition-all duration-300"
-                style={{
-                  backgroundColor: '#2D4A3E',
-                  opacity: mobileMenuOpen ? 0 : 1,
-                }}
-              />
-              <span
-                className="block w-6 h-px transition-all duration-300"
-                style={{
-                  backgroundColor: '#2D4A3E',
-                  transform: mobileMenuOpen ? 'rotate(-45deg) translate(3px, -3px)' : 'none',
-                }}
-              />
-            </button>
           </div>
-
-          {/* Mobile Menu */}
-          <div
-            className="lg:hidden overflow-hidden transition-all duration-300"
-            style={{
-              maxHeight: mobileMenuOpen ? '400px' : '0',
-              opacity: mobileMenuOpen ? 1 : 0,
-            }}
-          >
-            <div
-              className="py-6 flex flex-col gap-4"
-              style={{ borderTop: '1px solid rgba(184, 148, 95, 0.2)' }}
-            >
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm tracking-[0.15em] uppercase py-1"
-                  style={{
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 400,
-                    color: '#2D4A3E',
-                  }}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
+        )}
       </nav>
 
-      {/* ═══════════════════════════════════════════
-          HERO SECTION
-          ═══════════════════════════════════════════ */}
-      <section
-        className="relative w-full flex items-center justify-center gold-corners"
-        style={{ height: '100vh', minHeight: '600px' }}
-      >
+      {/* ════════════════════════════════════════════════
+          HERO
+          ════════════════════════════════════════════════ */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80"
-            alt="Regent Park Estate aerial view"
+            src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1800&q=80"
+            alt="Regent Park Estate"
             className="w-full h-full object-cover"
           />
+          {/* Dark green-tinted overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1A2F26]/70 via-[#2D4A3E]/55 to-[#1A2F26]/75" />
         </div>
 
-        {/* Dark overlay */}
-        <div
-          className="absolute inset-0"
-          style={{ backgroundColor: 'rgba(30, 40, 35, 0.5)' }}
-        />
-
-        {/* Additional corner accents */}
-        <div className="absolute inset-0 gold-corners-inner pointer-events-none" />
-
-        {/* Hero Content */}
-        <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
+        {/* Content */}
+        <div className="relative z-10 text-center px-6">
+          {/* Gold label */}
           <p
-            className="text-xs md:text-sm tracking-[0.4em] uppercase mb-8"
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 300,
-              color: '#B8945F',
-            }}
+            className="text-gold-light text-[11px] tracking-[0.4em] uppercase mb-8"
+            style={{ fontFamily: "'Lato', sans-serif", fontWeight: 400 }}
           >
-            An English Estate-Inspired Community
+            Residential Estate
           </p>
 
+          {/* Title */}
           <h1
-            className="text-5xl md:text-7xl lg:text-8xl mb-4"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              color: '#FAF8F5',
-              fontWeight: 700,
-              letterSpacing: '0.03em',
-              lineHeight: 1.1,
-            }}
+            className="text-white leading-[0.9]"
+            style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Regent Park
+            <span className="block text-7xl sm:text-8xl md:text-9xl lg:text-[140px] font-medium tracking-wide">
+              REGENT
+            </span>
+            <span className="block text-7xl sm:text-8xl md:text-9xl lg:text-[140px] font-light tracking-[0.3em] mt-2">
+              PARK
+            </span>
           </h1>
 
+          {/* Gold line */}
+          <div className="flex justify-center my-8">
+            <div className="gold-line-wide" />
+          </div>
+
+          {/* Tagline */}
           <p
-            className="text-xl md:text-2xl lg:text-3xl mb-6"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              color: '#B8945F',
-              fontWeight: 400,
-              letterSpacing: '0.2em',
-            }}
+            className="text-white/80 text-lg sm:text-xl font-light tracking-[0.15em]"
+            style={{ fontFamily: "'Lato', sans-serif" }}
           >
-            RESIDENTIAL ESTATE
+            Timeless Elegance, Modern Living
           </p>
 
-          <div
-            className="w-16 h-px mx-auto mb-8"
-            style={{ backgroundColor: '#B8945F', opacity: 0.5 }}
-          />
-
-          <p
-            className="text-base md:text-lg mb-12 max-w-xl mx-auto"
-            style={{
-              fontFamily: "'Lora', serif",
-              color: '#FAF8F5',
-              opacity: 0.85,
-              lineHeight: 1.9,
-            }}
-          >
-            Where timeless elegance meets modern living. A prestigious residential estate
-            nestled within lush, landscaped parklands.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#contact" className="btn-primary">
-              Book a Private Viewing
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+            <a
+              href="#residences"
+              className="px-10 py-4 bg-forest text-white text-[11px] font-bold tracking-[0.2em] uppercase border border-forest hover:bg-forest-light hover:border-forest-light"
+              style={{ fontFamily: "'Lato', sans-serif" }}
+            >
+              Explore Residences
             </a>
-            <a href="#about" className="btn-outline-light">
-              Discover the Estate
+            <a
+              href="#contact"
+              className="px-10 py-4 bg-transparent text-gold-light text-[11px] font-bold tracking-[0.2em] uppercase border border-gold/50 hover:bg-gold hover:text-white hover:border-gold"
+              style={{ fontFamily: "'Lato', sans-serif" }}
+            >
+              Book a Viewing
             </a>
           </div>
         </div>
@@ -343,258 +311,192 @@ export default function Home() {
         {/* Scroll indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
           <span
-            className="text-xs tracking-[0.25em] uppercase"
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              color: '#B8945F',
-              fontWeight: 300,
-            }}
+            className="text-white/40 text-[10px] tracking-[0.3em] uppercase"
+            style={{ fontFamily: "'Lato', sans-serif" }}
           >
             Scroll
           </span>
-          <div
-            className="w-px h-8 scroll-indicator"
-            style={{ backgroundColor: '#B8945F' }}
-          />
+          <div className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent" />
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          ABOUT THE ESTATE
-          ═══════════════════════════════════════════ */}
-      <section
-        id="about"
-        className="py-20 lg:py-32"
-        style={{ backgroundColor: '#FFFFFF' }}
-      >
+      {/* ════════════════════════════════════════════════
+          ABOUT
+          ════════════════════════════════════════════════ */}
+      <section id="about" className="py-24 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          {/* Section Header */}
-          <div className="text-center mb-16 lg:mb-20">
-            <p className="section-label">The Estate</p>
-            <h2 className="section-heading text-3xl md:text-4xl lg:text-5xl gold-underline">
-              A Legacy of Refined Living
-            </h2>
-          </div>
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+            {/* Left: Image */}
+            <div className="relative">
+              <div className="border border-gold/30 p-3">
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80"
+                  alt="The Estate"
+                  className="w-full h-[450px] lg:h-[550px] object-cover"
+                />
+              </div>
+            </div>
 
-          {/* Two-column layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left: Text */}
+            {/* Right: Content */}
             <div>
               <p
-                className="text-base md:text-lg mb-6"
-                style={{
-                  fontFamily: "'Lora', serif",
-                  color: '#5A5A55',
-                  lineHeight: 2,
-                }}
+                className="text-gold text-[11px] tracking-[0.35em] uppercase mb-4"
+                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
               >
-                Set across 15 hectares of beautifully landscaped grounds, Regent Park
-                is a masterfully planned residential estate that draws inspiration
-                from the great English country parks. Every detail &mdash; from the
-                tree-lined avenues to the Georgian-influenced architecture &mdash;
-                has been considered to create a place of enduring beauty and prestige.
+                The Estate
+              </p>
+              <h2
+                className="text-4xl lg:text-5xl text-forest mb-8"
+                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+              >
+                A Legacy of
+                <br />
+                Refined Living
+              </h2>
+              <div className="gold-line mb-8" />
+              <p
+                className="text-text-light text-base leading-relaxed mb-6"
+                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+              >
+                Regent Park is an exclusive residential estate inspired by the great English
+                country estates. Spanning 15 hectares of beautifully landscaped grounds, it
+                offers a rare opportunity to live within a community designed around timeless
+                principles of elegance, space, and tranquility.
               </p>
               <p
-                className="text-base md:text-lg mb-8"
-                style={{
-                  fontFamily: "'Lora', serif",
-                  color: '#5A5A55',
-                  lineHeight: 2,
-                }}
+                className="text-text-light text-base leading-relaxed"
+                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
               >
-                Here, manicured lawns give way to woodland walks, children play safely
-                on village greens, and neighbours gather at the Clubhouse for afternoon
-                tea. It is a community built on the values of quality, privacy, and
-                a deep appreciation for the finer things in life.
+                Every detail has been thoughtfully considered, from the tree-lined avenues
+                and ornamental gardens to the classical architectural language that defines
+                each residence. Here, modern convenience meets old-world charm in perfect
+                harmony.
               </p>
-
-              {/* Key facts */}
-              <div
-                className="grid grid-cols-3 gap-6 pt-8"
-                style={{ borderTop: '1px solid rgba(184, 148, 95, 0.2)' }}
-              >
-                {[
-                  { number: '15', label: 'Hectares' },
-                  { number: '280', label: 'Residences' },
-                  { number: '60%', label: 'Green Space' },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <p
-                      className="text-3xl md:text-4xl mb-1"
-                      style={{
-                        fontFamily: "'Playfair Display', serif",
-                        color: '#2D4A3E',
-                        fontWeight: 600,
-                      }}
-                    >
-                      {stat.number}
-                    </p>
-                    <p
-                      className="text-xs tracking-[0.15em] uppercase"
-                      style={{
-                        fontFamily: "'Montserrat', sans-serif",
-                        color: '#B8945F',
-                        fontWeight: 500,
-                      }}
-                    >
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
             </div>
+          </div>
 
-            {/* Right: Images */}
-            <div className="grid grid-cols-2 gap-4">
+          {/* Stats */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-20">
+            {[
+              { value: '15', label: 'Hectares' },
+              { value: '280', label: 'Residences' },
+              { value: '60%', label: 'Green Space' },
+              { value: '24/7', label: 'Security' },
+            ].map((stat) => (
               <div
-                className="overflow-hidden col-span-2"
-                style={{ border: '1px solid rgba(184, 148, 95, 0.3)' }}
+                key={stat.label}
+                className="border border-forest/10 p-8 text-center"
               >
-                <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
-                  alt="Regent Park estate grounds"
-                  className="w-full h-64 md:h-80 object-cover transition-transform duration-700 hover:scale-105"
-                />
+                <p
+                  className="text-3xl lg:text-4xl text-forest mb-2"
+                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+                >
+                  {stat.value}
+                </p>
+                <p
+                  className="text-text-muted text-[11px] tracking-[0.2em] uppercase"
+                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
+                >
+                  {stat.label}
+                </p>
               </div>
-              <div
-                className="overflow-hidden"
-                style={{ border: '1px solid rgba(184, 148, 95, 0.3)' }}
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80"
-                  alt="Grand entrance hall"
-                  className="w-full h-40 md:h-48 object-cover transition-transform duration-700 hover:scale-105"
-                />
-              </div>
-              <div
-                className="overflow-hidden"
-                style={{ border: '1px solid rgba(184, 148, 95, 0.3)' }}
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80"
-                  alt="Landscaped gardens"
-                  className="w-full h-40 md:h-48 object-cover transition-transform duration-700 hover:scale-105"
-                />
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
+      {/* ════════════════════════════════════════════════
           RESIDENCES
-          ═══════════════════════════════════════════ */}
-      <section
-        id="residences"
-        className="py-20 lg:py-32"
-        style={{ backgroundColor: '#FAF8F5' }}
-      >
+          ════════════════════════════════════════════════ */}
+      <section id="residences" className="py-24 lg:py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
-          <div className="text-center mb-16 lg:mb-20">
-            <p className="section-label">Our Collection</p>
-            <h2 className="section-heading text-3xl md:text-4xl lg:text-5xl gold-underline">
-              The Residences
-            </h2>
+          <div className="text-center mb-16">
             <p
-              className="mt-8 text-base md:text-lg max-w-2xl mx-auto"
-              style={{
-                fontFamily: "'Lora', serif",
-                color: '#5A5A55',
-                lineHeight: 1.8,
-              }}
+              className="text-gold text-[11px] tracking-[0.35em] uppercase mb-4"
+              style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
             >
-              Three distinguished residence types, each designed with meticulous attention
-              to proportion, light, and the art of gracious living.
+              Our Residences
             </p>
+            <h2
+              className="text-4xl lg:text-5xl text-forest mb-6"
+              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+            >
+              A Home for Every Chapter
+            </h2>
+            <div className="flex justify-center">
+              <div className="gold-line" />
+            </div>
           </div>
 
           {/* Residence Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {residences.map((residence) => (
-              <div
-                key={residence.name}
-                className="card-elegant overflow-hidden"
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid rgba(184, 148, 95, 0.25)',
-                }}
-              >
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {residences.map((res) => (
+              <div key={res.name} className="bg-white card-hover">
                 {/* Image */}
-                <div className="overflow-hidden">
+                <div className="img-zoom">
                   <img
-                    src={residence.image}
-                    alt={residence.name}
-                    className="w-full h-64 object-cover transition-transform duration-700 hover:scale-105"
+                    src={res.image}
+                    alt={res.name}
+                    className="w-full h-64 object-cover"
                   />
                 </div>
+
+                {/* Gold top border */}
+                <div className="h-px bg-gold" />
 
                 {/* Content */}
                 <div className="p-8">
                   <h3
-                    className="text-xl md:text-2xl mb-3"
-                    style={{
-                      fontFamily: "'Playfair Display', serif",
-                      color: '#2D4A3E',
-                      fontWeight: 600,
-                    }}
+                    className="text-2xl text-forest mb-2"
+                    style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
                   >
-                    {residence.name}
+                    {res.name}
                   </h3>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {[residence.size, residence.beds, residence.feature].map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs tracking-wider uppercase px-3 py-1"
-                        style={{
-                          fontFamily: "'Montserrat', sans-serif",
-                          color: '#B8945F',
-                          border: '1px solid rgba(184, 148, 95, 0.3)',
-                          fontWeight: 400,
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  {/* Type tag */}
+                  <span
+                    className="inline-block text-[10px] tracking-[0.2em] uppercase text-gold border border-gold/30 px-3 py-1 mb-4"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
+                  >
+                    {res.type}
+                  </span>
+
+                  {/* Size & Beds */}
+                  <div className="flex items-center gap-4 mb-4">
+                    <span
+                      className="text-text-muted text-sm"
+                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                    >
+                      {res.size}
+                    </span>
+                    <span className="w-1 h-1 bg-gold rounded-full" />
+                    <span
+                      className="text-text-muted text-sm"
+                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                    >
+                      {res.beds}
+                    </span>
                   </div>
 
+                  {/* Description */}
                   <p
-                    className="text-sm leading-relaxed mb-6"
-                    style={{
-                      fontFamily: "'Lora', serif",
-                      color: '#5A5A55',
-                      lineHeight: 1.8,
-                    }}
+                    className="text-text-light text-sm leading-relaxed mb-6"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
                   >
-                    {residence.description}
+                    {res.description}
                   </p>
 
-                  {/* Price */}
-                  <p
-                    className="text-sm mb-5"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      color: '#2D4A3E',
-                      fontWeight: 600,
-                      letterSpacing: '0.05em',
-                    }}
-                  >
-                    {residence.price}
-                  </p>
-
-                  {/* CTA */}
+                  {/* Link */}
                   <a
                     href="#contact"
-                    className="inline-block text-xs tracking-[0.15em] uppercase nav-link"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      color: '#B8945F',
-                      fontWeight: 500,
-                    }}
+                    className="inline-flex items-center gap-2 text-gold text-[11px] tracking-[0.15em] uppercase hover:text-gold-dark"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
                   >
-                    Learn More &rarr;
+                    View Details
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
                   </a>
                 </div>
               </div>
@@ -603,71 +505,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          ESTATE AMENITIES
-          ═══════════════════════════════════════════ */}
-      <section
-        id="amenities"
-        className="py-20 lg:py-32"
-        style={{ backgroundColor: '#FFFFFF' }}
-      >
+      {/* ════════════════════════════════════════════════
+          AMENITIES
+          ════════════════════════════════════════════════ */}
+      <section id="amenities" className="py-24 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
-          <div className="text-center mb-16 lg:mb-20">
-            <p className="section-label">World-Class Facilities</p>
-            <h2 className="section-heading text-3xl md:text-4xl lg:text-5xl gold-underline">
-              Estate Amenities
-            </h2>
+          <div className="text-center mb-16">
             <p
-              className="mt-8 text-base md:text-lg max-w-2xl mx-auto"
-              style={{
-                fontFamily: "'Lora', serif",
-                color: '#5A5A55',
-                lineHeight: 1.8,
-              }}
+              className="text-gold text-[11px] tracking-[0.35em] uppercase mb-4"
+              style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
             >
-              Every amenity has been thoughtfully designed to enhance your daily life,
-              from morning jogs through the park to evening gatherings at the Clubhouse.
+              Estate Amenities
             </p>
+            <h2
+              className="text-4xl lg:text-5xl text-forest mb-6"
+              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+            >
+              Life Beyond the Residence
+            </h2>
+            <div className="flex justify-center">
+              <div className="gold-line" />
+            </div>
           </div>
 
           {/* Amenity Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {amenities.map((amenity) => (
               <div
-                key={amenity.title}
-                className="amenity-card p-8 text-center"
-                style={{
-                  backgroundColor: '#FAF8F5',
-                  border: '1px solid rgba(184, 148, 95, 0.15)',
-                }}
+                key={amenity.name}
+                className="amenity-card border border-forest/8 p-10 text-center"
               >
-                <div
-                  className="amenity-icon inline-flex items-center justify-center w-16 h-16 mb-5 rounded-full"
-                  style={{
-                    border: '1px solid rgba(184, 148, 95, 0.3)',
-                    color: '#B8945F',
-                  }}
-                >
+                {/* Icon circle */}
+                <div className="amenity-icon inline-flex items-center justify-center w-16 h-16 rounded-full bg-forest text-white mb-6 transition-all duration-300">
                   {amenity.icon}
                 </div>
+
                 <h3
-                  className="amenity-title text-lg mb-3 transition-colors duration-300"
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    color: '#2D4A3E',
-                    fontWeight: 600,
-                  }}
+                  className="amenity-name text-xl text-forest mb-3 transition-colors duration-300"
+                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
                 >
-                  {amenity.title}
+                  {amenity.name}
                 </h3>
+
                 <p
-                  className="amenity-text text-sm transition-colors duration-300"
-                  style={{
-                    fontFamily: "'Lora', serif",
-                    color: '#5A5A55',
-                    lineHeight: 1.8,
-                  }}
+                  className="amenity-desc text-text-light text-sm leading-relaxed transition-colors duration-300"
+                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
                 >
                   {amenity.description}
                 </p>
@@ -677,92 +560,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          LIFESTYLE SECTION
-          ═══════════════════════════════════════════ */}
-      <section
-        id="lifestyle"
-        className="py-20 lg:py-32 relative"
-        style={{ backgroundColor: '#2D4A3E' }}
-      >
+      {/* ════════════════════════════════════════════════
+          LIFESTYLE
+          ════════════════════════════════════════════════ */}
+      <section id="lifestyle" className="py-24 lg:py-32 bg-forest">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          {/* Section Header */}
-          <div className="text-center mb-16 lg:mb-20">
-            <p
-              className="text-xs tracking-[0.3em] uppercase mb-4"
-              style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 500,
-                color: '#B8945F',
-              }}
-            >
-              Life at Regent Park
-            </p>
-            <h2 className="section-heading-light text-3xl md:text-4xl lg:text-5xl gold-underline">
-              A Community Like No Other
-            </h2>
-            <p
-              className="mt-8 text-base md:text-lg max-w-2xl mx-auto"
-              style={{
-                fontFamily: "'Lora', serif",
-                color: '#FAF8F5',
-                opacity: 0.8,
-                lineHeight: 1.8,
-              }}
-            >
-              Regent Park is more than a collection of fine homes. It is a living community
-              where families thrive, friendships flourish, and every day feels like a retreat.
-            </p>
-          </div>
-
-          {/* Two-column: image + features */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             {/* Left: Image */}
-            <div
-              className="overflow-hidden"
-              style={{ border: '1px solid rgba(184, 148, 95, 0.3)' }}
-            >
+            <div>
+              <p
+                className="text-gold text-[11px] tracking-[0.35em] uppercase mb-4"
+                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
+              >
+                The Lifestyle
+              </p>
+              <h2
+                className="text-4xl lg:text-5xl text-white mb-6"
+                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+              >
+                More Than a Home,
+                <br />
+                <span className="text-gold-light italic">A Way of Life</span>
+              </h2>
+              <div className="gold-line mb-10" />
+
               <img
-                src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80"
-                alt="Community gathering at Regent Park"
-                className="w-full h-80 md:h-[450px] object-cover transition-transform duration-700 hover:scale-105"
+                src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80"
+                alt="Regent Park Lifestyle"
+                className="w-full h-[350px] object-cover"
               />
             </div>
 
-            {/* Right: Feature list */}
-            <div className="space-y-8">
-              {lifestyleFeatures.map((feature, index) => (
-                <div
-                  key={feature.title}
-                  className="pb-8"
-                  style={{
-                    borderBottom:
-                      index < lifestyleFeatures.length - 1
-                        ? '1px solid rgba(184, 148, 95, 0.2)'
-                        : 'none',
-                  }}
-                >
-                  <h3
-                    className="text-lg md:text-xl mb-3"
-                    style={{
-                      fontFamily: "'Playfair Display', serif",
-                      color: '#B8945F',
-                      fontWeight: 600,
-                    }}
+            {/* Right: Features */}
+            <div className="flex flex-col gap-10">
+              {lifestyleFeatures.map((feature) => (
+                <div key={feature.number} className="flex gap-6">
+                  <span
+                    className="text-gold text-3xl font-light shrink-0 w-12"
+                    style={{ fontFamily: "'Playfair Display', serif" }}
                   >
-                    {feature.title}
-                  </h3>
-                  <p
-                    className="text-sm md:text-base"
-                    style={{
-                      fontFamily: "'Lora', serif",
-                      color: '#FAF8F5',
-                      opacity: 0.8,
-                      lineHeight: 1.8,
-                    }}
-                  >
-                    {feature.description}
-                  </p>
+                    {feature.number}
+                  </span>
+                  <div>
+                    <h3
+                      className="text-white text-xl mb-2"
+                      style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+                    >
+                      {feature.name}
+                    </h3>
+                    <p
+                      className="text-white/60 text-sm leading-relaxed"
+                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                    >
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -770,527 +622,303 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          MASTER PLAN / SITE LAYOUT
-          ═══════════════════════════════════════════ */}
-      <section
-        id="masterplan"
-        className="py-20 lg:py-32"
-        style={{ backgroundColor: '#FAF8F5' }}
-      >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          {/* Section Header */}
-          <div className="text-center mb-16 lg:mb-20">
-            <p className="section-label">Estate Layout</p>
-            <h2 className="section-heading text-3xl md:text-4xl lg:text-5xl gold-underline">
-              The Master Plan
-            </h2>
-            <p
-              className="mt-8 text-base md:text-lg max-w-2xl mx-auto"
-              style={{
-                fontFamily: "'Lora', serif",
-                color: '#5A5A55',
-                lineHeight: 1.8,
-              }}
-            >
-              Thoughtfully planned to balance privacy with community, nature with convenience,
-              and heritage with contemporary living.
-            </p>
-          </div>
-
-          {/* Master plan visual */}
-          <div
-            className="relative overflow-hidden mb-12"
-            style={{ border: '1px solid rgba(184, 148, 95, 0.3)' }}
-          >
-            <img
-              src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80"
-              alt="Regent Park master plan aerial view"
-              className="w-full h-64 md:h-96 lg:h-[480px] object-cover"
-            />
-            {/* Overlay with estate zones */}
-            <div
-              className="absolute inset-0 flex items-center justify-center"
-              style={{ backgroundColor: 'rgba(45, 74, 62, 0.4)' }}
-            >
-              <div className="text-center px-6">
-                <p
-                  className="text-xs tracking-[0.3em] uppercase mb-3"
-                  style={{
-                    fontFamily: "'Montserrat', sans-serif",
-                    color: '#B8945F',
-                    fontWeight: 500,
-                  }}
-                >
-                  15 Hectares of Curated Living
-                </p>
-                <h3
-                  className="text-2xl md:text-4xl mb-6"
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    color: '#FAF8F5',
-                    fontWeight: 600,
-                  }}
-                >
-                  Designed for Distinction
-                </h3>
-                <a href="#contact" className="btn-outline-light">
-                  Request Full Master Plan
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Estate zones grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { zone: 'The Villas', desc: 'Detached homes with private gardens' },
-              { zone: 'The Townhouses', desc: 'Three-storey elegant living' },
-              { zone: 'The Park Residences', desc: 'Apartments with park views' },
-              { zone: 'The Commons', desc: 'Clubhouse, shops & dining' },
-            ].map((item) => (
-              <div
-                key={item.zone}
-                className="p-6 text-center"
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid rgba(184, 148, 95, 0.2)',
-                }}
-              >
-                <h4
-                  className="text-base mb-2"
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    color: '#2D4A3E',
-                    fontWeight: 600,
-                  }}
-                >
-                  {item.zone}
-                </h4>
-                <p
-                  className="text-xs"
-                  style={{
-                    fontFamily: "'Lora', serif",
-                    color: '#7A7A72',
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
-          TESTIMONIAL / QUOTE
-          ═══════════════════════════════════════════ */}
-      <section
-        className="py-20 lg:py-32 relative"
-        style={{ backgroundColor: '#FFFFFF' }}
-      >
-        <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center relative">
-          {/* Opening quote mark */}
+      {/* ════════════════════════════════════════════════
+          TESTIMONIAL
+          ════════════════════════════════════════════════ */}
+      <section className="py-24 lg:py-32 bg-cream">
+        <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center">
+          {/* Gold quotation mark */}
           <span
-            className="quote-mark absolute -top-6 left-0 md:left-4 select-none"
-            aria-hidden="true"
+            className="text-gold/20 text-[120px] leading-none block -mb-10"
+            style={{ fontFamily: "'Playfair Display', serif" }}
           >
             &ldquo;
           </span>
 
           <blockquote
-            className="relative z-10 text-xl md:text-2xl lg:text-3xl italic leading-relaxed mb-8"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              color: '#2D4A3E',
-              fontWeight: 400,
-              lineHeight: 1.6,
-            }}
+            className="text-forest text-2xl lg:text-3xl leading-relaxed italic mb-10"
+            style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400 }}
           >
-            Regent Park captures something rare in modern development &mdash;
-            a genuine sense of place. It feels less like a housing estate
-            and more like coming home to an English country village.
+            Regent Park has given our family the rare gift of space and community in equal
+            measure. The grounds are magnificent, the neighbours are wonderful, and every
+            morning I wake up grateful for this extraordinary place we call home.
           </blockquote>
 
-          <div
-            className="w-12 h-px mx-auto mb-5"
-            style={{ backgroundColor: '#B8945F' }}
-          />
+          <div className="gold-line mx-auto mb-8" />
 
           <p
-            className="text-xs tracking-[0.2em] uppercase"
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              color: '#B8945F',
-              fontWeight: 500,
-            }}
+            className="text-forest text-sm tracking-[0.1em]"
+            style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
           >
-            Architectural Digest Southeast Asia, 2025
+            Victoria & James Hartington
           </p>
-
-          {/* Closing quote mark */}
-          <span
-            className="quote-mark absolute -bottom-12 right-0 md:right-4 select-none"
-            aria-hidden="true"
+          <p
+            className="text-text-muted text-[11px] tracking-[0.15em] uppercase mt-1"
+            style={{ fontFamily: "'Lato', sans-serif", fontWeight: 400 }}
           >
-            &rdquo;
-          </span>
+            Kensington Villa Residents
+          </p>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          CONTACT / CTA SECTION
-          ═══════════════════════════════════════════ */}
-      <section
-        id="contact"
-        className="py-20 lg:py-32"
-        style={{ backgroundColor: '#FAF8F5' }}
-      >
+      {/* ════════════════════════════════════════════════
+          CONTACT
+          ════════════════════════════════════════════════ */}
+      <section id="contact" className="py-24 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          {/* Section Header */}
-          <div className="text-center mb-16 lg:mb-20">
-            <p className="section-label">Begin Your Journey</p>
-            <h2 className="section-heading text-3xl md:text-4xl lg:text-5xl gold-underline">
-              Private Enquiries
-            </h2>
-          </div>
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20">
+            {/* Left: Info */}
+            <div>
+              <p
+                className="text-gold text-[11px] tracking-[0.35em] uppercase mb-4"
+                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
+              >
+                Get in Touch
+              </p>
+              <h2
+                className="text-4xl lg:text-5xl text-forest mb-6"
+                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+              >
+                Begin Your Journey
+              </h2>
+              <div className="gold-line mb-8" />
+              <p
+                className="text-text-light text-base leading-relaxed mb-12"
+                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+              >
+                We invite you to experience Regent Park firsthand. Our estate consultants
+                are available to arrange a private viewing and guide you through every
+                aspect of life within the estate.
+              </p>
 
-          {/* Two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Left: Contact info */}
-            <div className="flex flex-col justify-center">
-              <div className="space-y-8">
-                {/* Address */}
+              {/* Contact Details */}
+              <div className="flex flex-col gap-8">
                 <div>
-                  <h3
-                    className="text-xs tracking-[0.2em] uppercase mb-3"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      color: '#B8945F',
-                      fontWeight: 600,
-                    }}
+                  <h4
+                    className="text-forest text-sm tracking-[0.1em] uppercase mb-2"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
                   >
-                    Sales Gallery
-                  </h3>
+                    Estate Sales Gallery
+                  </h4>
                   <p
-                    className="text-base"
-                    style={{
-                      fontFamily: "'Lora', serif",
-                      color: '#2D4A3E',
-                      lineHeight: 1.8,
-                    }}
+                    className="text-text-light text-sm"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
                   >
-                    Regent Park Residential Estate
-                    <br />
-                    Jl. Imam Bonjol No. 42
-                    <br />
-                    Menteng, Jakarta Pusat 10310
-                    <br />
-                    Indonesia
+                    Regent Park Boulevard No. 1<br />
+                    Jakarta Selatan 12310, Indonesia
                   </p>
                 </div>
 
-                {/* Phone */}
                 <div>
-                  <h3
-                    className="text-xs tracking-[0.2em] uppercase mb-3"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      color: '#B8945F',
-                      fontWeight: 600,
-                    }}
+                  <h4
+                    className="text-forest text-sm tracking-[0.1em] uppercase mb-2"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
                   >
                     Telephone
-                  </h3>
+                  </h4>
                   <p
-                    className="text-base"
-                    style={{ fontFamily: "'Lora', serif", color: '#2D4A3E' }}
+                    className="text-text-light text-sm"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
                   >
-                    +62 21 3190 1928
+                    +62 21 5080 8888
                   </p>
                 </div>
 
-                {/* Email */}
                 <div>
-                  <h3
-                    className="text-xs tracking-[0.2em] uppercase mb-3"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      color: '#B8945F',
-                      fontWeight: 600,
-                    }}
+                  <h4
+                    className="text-forest text-sm tracking-[0.1em] uppercase mb-2"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
                   >
                     Email
-                  </h3>
+                  </h4>
                   <p
-                    className="text-base"
-                    style={{ fontFamily: "'Lora', serif", color: '#2D4A3E' }}
+                    className="text-text-light text-sm"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
                   >
                     enquiries@regentpark.id
                   </p>
                 </div>
 
-                {/* Viewing hours */}
                 <div>
-                  <h3
-                    className="text-xs tracking-[0.2em] uppercase mb-3"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      color: '#B8945F',
-                      fontWeight: 600,
-                    }}
+                  <h4
+                    className="text-forest text-sm tracking-[0.1em] uppercase mb-2"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
                   >
-                    Private Viewings
-                  </h3>
+                    Viewing Hours
+                  </h4>
                   <p
-                    className="text-base"
-                    style={{
-                      fontFamily: "'Lora', serif",
-                      color: '#2D4A3E',
-                      lineHeight: 1.8,
-                    }}
+                    className="text-text-light text-sm"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
                   >
-                    By appointment only
-                    <br />
-                    Monday &ndash; Saturday, 09:00 &ndash; 17:00
+                    Monday &ndash; Saturday: 09:00 &ndash; 17:00<br />
+                    Sunday: By appointment only
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Right: Contact form */}
-            <div
-              className="p-8 md:p-10"
-              style={{
-                backgroundColor: '#FFFFFF',
-                border: '1px solid rgba(184, 148, 95, 0.2)',
-              }}
-            >
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-                {/* Name */}
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-xs tracking-[0.15em] uppercase mb-2"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      color: '#7A7A72',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="form-input w-full px-4 py-3 text-sm border"
-                    style={{
-                      fontFamily: "'Lora', serif",
-                      backgroundColor: '#FAF8F5',
-                      borderColor: 'rgba(184, 148, 95, 0.25)',
-                      color: '#1A1A1A',
-                    }}
-                    placeholder="Your full name"
-                  />
-                </div>
+            {/* Right: Form */}
+            <div>
+              <div className="bg-cream p-10 lg:p-12">
+                <h3
+                  className="text-2xl text-forest mb-8"
+                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+                >
+                  Arrange a Private Viewing
+                </h3>
 
-                {/* Email */}
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-xs tracking-[0.15em] uppercase mb-2"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      color: '#7A7A72',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="form-input w-full px-4 py-3 text-sm border"
-                    style={{
-                      fontFamily: "'Lora', serif",
-                      backgroundColor: '#FAF8F5',
-                      borderColor: 'rgba(184, 148, 95, 0.25)',
-                      color: '#1A1A1A',
-                    }}
-                    placeholder="Your email address"
-                  />
-                </div>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                  <div>
+                    <label
+                      className="block text-forest text-[11px] tracking-[0.15em] uppercase mb-2"
+                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
+                    >
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Enter your full name"
+                      required
+                      className="w-full px-4 py-3 bg-white border border-forest/15 text-forest text-sm focus:border-gold focus:ring-0"
+                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                    />
+                  </div>
 
-                {/* Phone */}
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-xs tracking-[0.15em] uppercase mb-2"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      color: '#7A7A72',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="form-input w-full px-4 py-3 text-sm border"
-                    style={{
-                      fontFamily: "'Lora', serif",
-                      backgroundColor: '#FAF8F5',
-                      borderColor: 'rgba(184, 148, 95, 0.25)',
-                      color: '#1A1A1A',
-                    }}
-                    placeholder="Your phone number"
-                  />
-                </div>
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div>
+                      <label
+                        className="block text-forest text-[11px] tracking-[0.15em] uppercase mb-2"
+                        style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
+                      >
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="your@email.com"
+                        required
+                        className="w-full px-4 py-3 bg-white border border-forest/15 text-forest text-sm focus:border-gold focus:ring-0"
+                        style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        className="block text-forest text-[11px] tracking-[0.15em] uppercase mb-2"
+                        style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
+                      >
+                        Phone
+                      </label>
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="+62 xxx xxxx xxxx"
+                        className="w-full px-4 py-3 bg-white border border-forest/15 text-forest text-sm focus:border-gold focus:ring-0"
+                        style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                      />
+                    </div>
+                  </div>
 
-                {/* Interest */}
-                <div>
-                  <label
-                    htmlFor="interest"
-                    className="block text-xs tracking-[0.15em] uppercase mb-2"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      color: '#7A7A72',
-                      fontWeight: 500,
-                    }}
-                  >
-                    I am interested in
-                  </label>
-                  <select
-                    id="interest"
-                    name="interest"
-                    className="form-input w-full px-4 py-3 text-sm border"
-                    style={{
-                      fontFamily: "'Lora', serif",
-                      backgroundColor: '#FAF8F5',
-                      borderColor: 'rgba(184, 148, 95, 0.25)',
-                      color: '#1A1A1A',
-                      appearance: 'none',
-                    }}
-                  >
-                    <option value="">Select a residence type</option>
-                    <option value="villa">The Kensington Villa</option>
-                    <option value="townhouse">The Belgravia Townhouse</option>
-                    <option value="apartment">The Windsor Residence</option>
-                    <option value="general">General Enquiry</option>
-                  </select>
-                </div>
+                  <div>
+                    <label
+                      className="block text-forest text-[11px] tracking-[0.15em] uppercase mb-2"
+                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
+                    >
+                      Interest
+                    </label>
+                    <select
+                      value={formData.interest}
+                      onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
+                      className="w-full px-4 py-3 bg-white border border-forest/15 text-forest text-sm focus:border-gold focus:ring-0 appearance-none"
+                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                    >
+                      <option value="">Select residence type</option>
+                      <option value="villa">Kensington Villa</option>
+                      <option value="townhouse">Belgravia Townhouse</option>
+                      <option value="apartment">Windsor Apartment</option>
+                      <option value="general">General Enquiry</option>
+                    </select>
+                  </div>
 
-                {/* Message */}
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-xs tracking-[0.15em] uppercase mb-2"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      color: '#7A7A72',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    className="form-input w-full px-4 py-3 text-sm border resize-none"
-                    style={{
-                      fontFamily: "'Lora', serif",
-                      backgroundColor: '#FAF8F5',
-                      borderColor: 'rgba(184, 148, 95, 0.25)',
-                      color: '#1A1A1A',
-                    }}
-                    placeholder="Tell us about your requirements"
-                  />
-                </div>
+                  <div>
+                    <label
+                      className="block text-forest text-[11px] tracking-[0.15em] uppercase mb-2"
+                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Tell us how we can assist you..."
+                      rows={4}
+                      className="w-full px-4 py-3 bg-white border border-forest/15 text-forest text-sm focus:border-gold focus:ring-0 resize-none"
+                      style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                    />
+                  </div>
 
-                {/* Submit */}
-                <button type="submit" className="btn-primary w-full text-center">
-                  Submit Enquiry
-                </button>
-              </form>
+                  <button
+                    type="submit"
+                    className="w-full py-4 bg-forest text-white text-[11px] font-bold tracking-[0.2em] uppercase hover:bg-forest-light"
+                    style={{ fontFamily: "'Lato', sans-serif" }}
+                  >
+                    Submit Enquiry
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
+      {/* ════════════════════════════════════════════════
           FOOTER
-          ═══════════════════════════════════════════ */}
-      <footer
-        className="py-16"
-        style={{
-          backgroundColor: '#2D4A3E',
-          borderTop: '1px solid rgba(184, 148, 95, 0.3)',
-        }}
-      >
+          ════════════════════════════════════════════════ */}
+      <footer className="py-16 lg:py-20 bg-forest-dark">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          {/* Top row */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-            {/* Brand */}
+          <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
+            {/* Column 1: Brand */}
             <div>
               <h3
-                className="text-xl tracking-[0.15em] mb-4"
-                style={{
-                  fontFamily: "'Playfair Display', serif",
-                  color: '#B8945F',
-                  fontWeight: 600,
-                }}
+                className="text-white text-xl tracking-[0.15em] mb-2"
+                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
               >
                 REGENT PARK
               </h3>
               <p
-                className="text-sm"
-                style={{
-                  fontFamily: "'Lora', serif",
-                  color: '#FAF8F5',
-                  opacity: 0.6,
-                  lineHeight: 1.8,
-                }}
+                className="text-gold text-[9px] tracking-[0.3em] uppercase mb-6"
+                style={{ fontFamily: "'Lato', sans-serif" }}
               >
-                A prestigious residential estate inspired
-                by the great English country parks. Where timeless
-                elegance meets modern living.
+                Residential Estate
+              </p>
+              <p
+                className="text-white/40 text-sm leading-relaxed"
+                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+              >
+                An exclusive residential community
+                inspired by the great English estates.
+                Timeless elegance in the heart of Jakarta.
               </p>
             </div>
 
-            {/* Quick links */}
+            {/* Column 2: Quick Links */}
             <div>
               <h4
-                className="text-xs tracking-[0.2em] uppercase mb-4"
-                style={{
-                  fontFamily: "'Montserrat', sans-serif",
-                  color: '#B8945F',
-                  fontWeight: 600,
-                }}
+                className="text-white text-[11px] tracking-[0.2em] uppercase mb-6"
+                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
               >
-                Quick Links
+                Explore
               </h4>
               <div className="flex flex-col gap-3">
                 {navLinks.map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
-                    className="text-sm transition-colors duration-300"
-                    style={{
-                      fontFamily: "'Lora', serif",
-                      color: 'rgba(250, 248, 245, 0.6)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#B8945F';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgba(250, 248, 245, 0.6)';
-                    }}
+                    className="text-white/40 text-sm hover:text-gold"
+                    style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
                   >
                     {link.label}
                   </a>
@@ -1298,96 +926,61 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Contact summary */}
+            {/* Column 3: Contact */}
             <div>
               <h4
-                className="text-xs tracking-[0.2em] uppercase mb-4"
-                style={{
-                  fontFamily: "'Montserrat', sans-serif",
-                  color: '#B8945F',
-                  fontWeight: 600,
-                }}
+                className="text-white text-[11px] tracking-[0.2em] uppercase mb-6"
+                style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700 }}
               >
-                Get in Touch
+                Contact
               </h4>
-              <div className="space-y-3">
+              <div className="flex flex-col gap-3">
                 <p
-                  className="text-sm"
-                  style={{
-                    fontFamily: "'Lora', serif",
-                    color: 'rgba(250, 248, 245, 0.6)',
-                    lineHeight: 1.8,
-                  }}
+                  className="text-white/40 text-sm"
+                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
                 >
-                  +62 21 3190 1928
+                  Regent Park Boulevard No. 1
                 </p>
                 <p
-                  className="text-sm"
-                  style={{
-                    fontFamily: "'Lora', serif",
-                    color: 'rgba(250, 248, 245, 0.6)',
-                  }}
+                  className="text-white/40 text-sm"
+                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                >
+                  Jakarta Selatan 12310
+                </p>
+                <p
+                  className="text-white/40 text-sm"
+                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
+                >
+                  +62 21 5080 8888
+                </p>
+                <p
+                  className="text-white/40 text-sm"
+                  style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
                 >
                   enquiries@regentpark.id
-                </p>
-                <p
-                  className="text-sm"
-                  style={{
-                    fontFamily: "'Lora', serif",
-                    color: 'rgba(250, 248, 245, 0.6)',
-                    lineHeight: 1.8,
-                  }}
-                >
-                  Menteng, Jakarta Pusat
-                  <br />
-                  Indonesia
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Divider */}
-          <div
-            className="w-full h-px mb-8"
-            style={{ backgroundColor: 'rgba(184, 148, 95, 0.2)' }}
-          />
-
-          {/* Bottom row */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          {/* Bottom Bar */}
+          <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <p
-              className="text-xs"
-              style={{
-                fontFamily: "'Montserrat', sans-serif",
-                color: 'rgba(250, 248, 245, 0.4)',
-                fontWeight: 400,
-                letterSpacing: '0.05em',
-              }}
+              className="text-white/30 text-xs"
+              style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
             >
-              &copy; 2026 Regent Park Residential Estate. All rights reserved.
+              &copy; 2026 Regent Park Estate. All rights reserved.
             </p>
-
             <p
-              className="text-xs"
-              style={{
-                fontFamily: "'Montserrat', sans-serif",
-                color: 'rgba(250, 248, 245, 0.4)',
-                fontWeight: 400,
-                letterSpacing: '0.05em',
-              }}
+              className="text-white/30 text-xs"
+              style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300 }}
             >
               Made with &#9829; by{' '}
               <a
                 href="https://creativism.id"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors duration-300"
-                style={{ color: '#B8945F' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#FAF8F5';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = '#B8945F';
-                }}
+                className="text-gold/60 hover:text-gold"
               >
                 Creativism
               </a>
@@ -1395,6 +988,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }

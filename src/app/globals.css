@@ -1,19 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap');
+
 @import "tailwindcss";
 
 @theme inline {
   --color-cream: #FAF8F5;
-  --color-white: #FFFFFF;
+  --color-cream-dark: #F0EDE8;
   --color-forest: #2D4A3E;
   --color-forest-light: #3A5F50;
+  --color-forest-dark: #1A2F26;
   --color-gold: #B8945F;
-  --color-gold-light: #D4B483;
-  --color-dark: #1A1A1A;
-  --color-muted: #7A7A72;
-  --color-body: #5A5A55;
-  --font-playfair: 'Playfair Display', serif;
-  --font-lora: 'Lora', serif;
-  --font-montserrat: 'Montserrat', sans-serif;
+  --color-gold-light: #D4B07A;
+  --color-gold-dark: #9A7A4A;
+  --color-text: #2D4A3E;
+  --color-text-light: #5A7A6E;
+  --color-text-muted: #8A9E96;
+  --color-white: #FFFFFF;
+
+  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Lato', 'Helvetica Neue', Arial, sans-serif;
 }
 
 * {
@@ -27,174 +31,87 @@ html {
 }
 
 body {
-  font-family: 'Lora', serif;
-  color: #1A1A1A;
-  background: #FAF8F5;
+  background-color: #FAF8F5;
+  color: #2D4A3E;
+  font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* ═══════════════════════════════════════════
-   GOLD DECORATIVE ELEMENTS
-   ═══════════════════════════════════════════ */
-
-/* Gold corner accents for hero */
-.gold-corners {
-  position: relative;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  line-height: 1.2;
+  font-weight: 500;
 }
 
-.gold-corners::before,
-.gold-corners::after {
-  content: '';
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  border-color: #B8945F;
-  border-style: solid;
-  pointer-events: none;
-  opacity: 0.6;
-}
-
-.gold-corners::before {
-  top: 32px;
-  left: 32px;
-  border-width: 1px 0 0 1px;
-}
-
-.gold-corners::after {
-  bottom: 32px;
-  right: 32px;
-  border-width: 0 1px 1px 0;
-}
-
-.gold-corners-inner::before,
-.gold-corners-inner::after {
-  content: '';
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  border-color: #B8945F;
-  border-style: solid;
-  pointer-events: none;
-  opacity: 0.6;
-}
-
-.gold-corners-inner::before {
-  top: 32px;
-  right: 32px;
-  border-width: 1px 1px 0 0;
-}
-
-.gold-corners-inner::after {
-  bottom: 32px;
-  left: 32px;
-  border-width: 0 0 1px 1px;
-}
-
-/* Gold underline decoration for section headings */
-.gold-underline {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 16px;
-}
-
-.gold-underline::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+/* Gold decorative lines */
+.gold-line {
   width: 60px;
   height: 1px;
-  background: #B8945F;
+  background-color: #B8945F;
 }
 
-/* ═══════════════════════════════════════════
-   CARD & HOVER EFFECTS
-   ═══════════════════════════════════════════ */
+.gold-line-wide {
+  width: 100px;
+  height: 1px;
+  background-color: #B8945F;
+}
 
-.card-elegant {
+/* Selection */
+::selection {
+  background-color: #2D4A3E;
+  color: #FAF8F5;
+}
+
+::-moz-selection {
+  background-color: #2D4A3E;
+  color: #FAF8F5;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2D4A3E;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3A5F50;
+}
+
+/* Card hover effects */
+.card-hover {
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.card-elegant:hover {
+.card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 40px rgba(45, 74, 62, 0.08);
 }
 
-/* ═══════════════════════════════════════════
-   BUTTON STYLES
-   ═══════════════════════════════════════════ */
-
-.btn-primary {
-  display: inline-block;
-  padding: 16px 40px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  text-decoration: none;
-  background-color: #2D4A3E;
-  color: #B8945F;
-  border: 1px solid #2D4A3E;
-  transition: all 0.3s ease;
-  cursor: pointer;
+/* Image zoom on hover */
+.img-zoom {
+  overflow: hidden;
 }
 
-.btn-primary:hover {
-  background-color: #B8945F;
-  color: #FFFFFF;
-  border-color: #B8945F;
+.img-zoom img {
+  transition: transform 0.6s ease;
 }
 
-.btn-outline {
-  display: inline-block;
-  padding: 16px 40px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  text-decoration: none;
-  background-color: transparent;
-  color: #B8945F;
-  border: 1px solid #B8945F;
-  transition: all 0.3s ease;
-  cursor: pointer;
+.img-zoom:hover img {
+  transform: scale(1.05);
 }
 
-.btn-outline:hover {
-  background-color: #B8945F;
-  color: #FFFFFF;
-}
-
-/* Light variant for dark backgrounds */
-.btn-outline-light {
-  display: inline-block;
-  padding: 16px 40px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  text-decoration: none;
-  background-color: transparent;
-  color: #FAF8F5;
-  border: 1px solid rgba(250, 248, 245, 0.4);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.btn-outline-light:hover {
-  background-color: #B8945F;
-  color: #FFFFFF;
-  border-color: #B8945F;
-}
-
-/* ═══════════════════════════════════════════
-   NAVIGATION
-   ═══════════════════════════════════════════ */
-
+/* Nav link underline animation */
 .nav-link {
   position: relative;
 }
@@ -214,64 +131,28 @@ body {
   width: 100%;
 }
 
-/* ═══════════════════════════════════════════
-   SECTION TITLE PATTERN
-   ═══════════════════════════════════════════ */
-
-.section-label {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #B8945F;
-  margin-bottom: 16px;
-}
-
-.section-heading {
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  color: #2D4A3E;
-  line-height: 1.3;
-}
-
-.section-heading-light {
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  color: #FAF8F5;
-  line-height: 1.3;
-}
-
-/* ═══════════════════════════════════════════
-   QUOTATION MARKS
-   ═══════════════════════════════════════════ */
-
-.quote-mark {
-  font-family: 'Playfair Display', serif;
-  font-size: 100px;
-  line-height: 1;
-  color: #B8945F;
-  opacity: 0.25;
-}
-
-/* ═══════════════════════════════════════════
-   FORM INPUTS
-   ═══════════════════════════════════════════ */
-
-.form-input {
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.form-input:focus {
+/* Focus styles */
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
-  border-color: #B8945F;
-  box-shadow: 0 0 0 3px rgba(184, 148, 95, 0.1);
+  border-color: #B8945F !important;
+  box-shadow: 0 0 0 3px rgba(184, 148, 95, 0.12);
 }
 
-/* ═══════════════════════════════════════════
-   AMENITY CARD HOVER
-   ═══════════════════════════════════════════ */
+/* Button & link transitions */
+button, a {
+  transition: all 0.3s ease;
+}
 
+/* Placeholder */
+::placeholder {
+  color: #8A9E96;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+
+/* Amenity card hover */
 .amenity-card {
   transition: all 0.35s ease;
 }
@@ -281,105 +162,15 @@ body {
   border-color: #2D4A3E;
 }
 
-.amenity-card:hover .amenity-title {
+.amenity-card:hover .amenity-name {
   color: #B8945F;
 }
 
-.amenity-card:hover .amenity-text {
-  color: #FAF8F5;
+.amenity-card:hover .amenity-desc {
+  color: rgba(250, 248, 245, 0.85);
 }
 
 .amenity-card:hover .amenity-icon {
-  transform: scale(1.1);
-}
-
-.amenity-icon {
-  transition: transform 0.3s ease;
-}
-
-/* ═══════════════════════════════════════════
-   GOLD DIVIDER
-   ═══════════════════════════════════════════ */
-
-.gold-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-.gold-divider::before,
-.gold-divider::after {
-  content: '';
-  width: 40px;
-  height: 1px;
-  background: #B8945F;
-  opacity: 0.5;
-}
-
-/* ═══════════════════════════════════════════
-   ANIMATIONS
-   ═══════════════════════════════════════════ */
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeInUp 0.8s ease forwards;
-}
-
-@keyframes gentlePulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
-}
-
-.scroll-indicator {
-  animation: gentlePulse 2s ease-in-out infinite;
-}
-
-/* ═══════════════════════════════════════════
-   SCROLLBAR
-   ═══════════════════════════════════════════ */
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #FAF8F5;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #2D4A3E;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #B8945F;
-}
-
-/* ═══════════════════════════════════════════
-   RESPONSIVE FINE-TUNING
-   ═══════════════════════════════════════════ */
-
-@media (max-width: 768px) {
-  .gold-corners::before,
-  .gold-corners::after,
-  .gold-corners-inner::before,
-  .gold-corners-inner::after {
-    width: 40px;
-    height: 40px;
-  }
-
-  .quote-mark {
-    font-size: 72px;
-  }
+  background-color: #B8945F;
+  color: #FFFFFF;
 }
